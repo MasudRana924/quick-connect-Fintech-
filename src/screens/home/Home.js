@@ -1,45 +1,30 @@
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { logout } from '../../redux/reducers/auth/authSlice';
 import { useDispatch } from 'react-redux';
-// import {useDispatch, useSelector} from 'react-redux';
-// import {getAllProducts} from '../redux/features/ProductsSlice';
+import Header from '../components/Header';
+import PaymentCategory from '../main/PaymentCategory';
 
 const Home = () => {
-  // hooks
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
-  // const {products, isSuccess} = useSelector(state => state.products);
-  // console.log('🚀 ~ file: Home.js:12 ~ Home ~ products:', products);
 
   useEffect(() => {
     // dispatch(getAllProducts());
   }, []);
 
   return (
-    <View style={styles.container}>
-      {/* <FlatList
-        data={products?.products}
-        renderItem={({item, index}) => {
-          return (
-            <Pressable
-              onPress={() => navigate('SingleProduct', {Product: item})}
-              style={styles.cardBox}
-              key={item.id}>
-              <Image source={{uri: item.thumbnail}} style={styles.img} />
-              <View style={styles.footer}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>${item.price}</Text>
-              </View>
-            </Pressable>
-          );
-        }}
-      /> */}
-      <Pressable onPress={() => dispatch(logout())} style={styles.container}>
-        <Text style={styles.title}>Logout</Text>
-      </Pressable>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header />
+      <ScrollView>
+      <PaymentCategory/>
+      <PaymentCategory/>
+      <PaymentCategory/>
+      <PaymentCategory/>
+      <PaymentCategory/>
+      <PaymentCategory/>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -48,7 +33,6 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: '5%',
   },
   img: {
     width: '100%',

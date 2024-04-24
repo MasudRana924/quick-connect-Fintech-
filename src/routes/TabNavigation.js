@@ -12,8 +12,15 @@ const TabNavigation = () => {
       screenOptions={{
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
+        tabBarStyle:styles.tabBarStyle,
+        headerShown: false,
+      }}
+      tabBarOptions={{
+        activeTintColor: '#ef2d56', 
+        inactiveTintColor: 'black',
       }}>
-      <Tab.Screen name="Home" component={Home} />
+        
+      <Tab.Screen name="Home"      component={Home} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
@@ -27,6 +34,11 @@ const styles = StyleSheet.create({
   },
   tabBarLabelStyle: {
     fontSize: 18,
-    paddingBottom: 10,
+    paddingBottom: 15,
+  },
+  tabBarStyle: {
+    borderTopLeftRadius: 15, 
+    borderTopRightRadius: 15, 
+    borderColor:'white'
   },
 });
