@@ -29,4 +29,5 @@ const AppNavigation = () => {
 
 export default AppNavigation;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+});

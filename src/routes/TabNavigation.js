@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
   },
   tabBarLabelStyle: {
     fontSize: 18,
-    paddingBottom: 15,
+    paddingBottom: 18,
+    backgroundColor: 'white',
   },
   tabBarStyle: {
-    borderTopLeftRadius: 15, 
-    borderTopRightRadius: 15, 
-    borderColor:'white'
+    borderColor:'white',
+    backgroundColor: 'white',
   },
 });

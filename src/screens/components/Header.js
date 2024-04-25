@@ -10,7 +10,7 @@ const Header = () => {
             <View style={styles.userInfo}>
                 <TouchableOpacity onPress={() => console.log('Go to profile')}>
                     {user?.avatarLogo ? (
-                        <Image src={avatarImg} style={styles.avatar} />
+                        <Image source={avatarImg} style={styles.avatar} />
                     ) : (
                         <Image source={avatarImg} style={styles.avatar} />
                     )}
@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center', // Align items vertically
-        height: 60, // Adjusted header height
+        alignItems: 'center', 
+        height: 100,
+        paddingTop:20
     },
     userInfo: {
         flexDirection: 'row',

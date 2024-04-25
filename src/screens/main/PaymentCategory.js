@@ -1,47 +1,54 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-const DATA = [
-    { id: '1', title: 'Item 1' },
-    { id: '2', title: 'Item 2' },
-    { id: '3', title: 'Item 3' },
-    { id: '4', title: 'Item 4' },
-    { id: '5', title: 'Item 5' },
-    { id: '6', title: 'Item 6' },
-    { id: '7', title: 'Item 7' },
-    { id: '8', title: 'Item 8' },
-    { id: '9', title: 'Item 9' },
-    { id: '10', title: 'Item 10' },
-];
-
+import { View, Text, StyleSheet, TouchableOpacity ,Image} from 'react-native';
+import sendImg from '../../assets/taka (5).png';
+import cashOutImg from '../../assets/taka (6).png';
+import rechargeImg from '../../assets/money.png';
+import paymentImg from '../../assets/add-cart.png';
+import addMoneyImg from '../../assets/wallet.png';
+import loanImg from '../../assets/salary.png';
+import savingsImg from '../../assets/approved.png';
+import moreImg from '../../assets/app.png';
 const PaymentCategory = () => {
-    const [showAll, setShowAll] = useState(false);
-
-    const toggleShowAll = () => {
-        setShowAll(!showAll);
-    };
-
-    const renderGridItem = (item) => (
-        <View key={item.id} style={styles.gridItem}>
-            <Text>{item.title}</Text>
-        </View>
-    );
 
     return (
         <View style={styles.container}>
             <View style={styles.gridContainer}>
-                {DATA.slice(0, showAll ? DATA.length : 4).map(renderGridItem)}
+                <View>
+                <Image source={sendImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Send Money</Text>
+                </View>
+                <View>
+                <Image source={cashOutImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Cash Out</Text>
+                </View>
+                <View>
+                <Image source={rechargeImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Recharge</Text>
+                </View>
+                <View>
+                <Image source={paymentImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Payment</Text>
+                </View>
             </View>
-            {!showAll && DATA.length > 4 && (
-                <TouchableOpacity onPress={toggleShowAll} style={styles.button}>
-                    <Text>Show More</Text>
-                </TouchableOpacity>
-            )}
-            {showAll && (
-                <TouchableOpacity onPress={toggleShowAll} style={styles.button}>
-                    <Text>Hide</Text>
-                </TouchableOpacity>
-            )}
+            <View style={styles.gridContainer}>
+                <View>
+                <Image source={addMoneyImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Add Money</Text>
+                </View>
+                <View>
+                <Image source={savingsImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Savings</Text>
+                </View>
+                <View>
+                <Image source={loanImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>Loan</Text>
+                </View>
+                <View>
+                <Image source={moreImg} style={styles.moneyIcon} />
+                <Text style={styles.title}>more</Text>
+                </View>
+            </View>
+
         </View>
     );
 };
@@ -54,21 +61,17 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     gridContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center', 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        margin:10
     },
-    gridItem: {
-        backgroundColor: '#DDDDDD',
-        margin:5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 100,
-        width: '22%',
+    moneyIcon:{
+        height:40,
+        width:40,
     },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 10,
-    },
+    title:{
+        fontSize:12,
+        marginTop:6,
+        textAlign:'center'
+    }
 });

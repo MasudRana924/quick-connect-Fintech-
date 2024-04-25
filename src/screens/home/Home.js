@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import PaymentCategory from '../main/PaymentCategory';
+import Offer from '../offer/Offer';
+import Suggestions from '../suggestions/Suggestions';
 
 const Home = () => {
   const { navigate } = useNavigation();
@@ -18,11 +20,8 @@ const Home = () => {
       <Header />
       <ScrollView>
       <PaymentCategory/>
-      <PaymentCategory/>
-      <PaymentCategory/>
-      <PaymentCategory/>
-      <PaymentCategory/>
-      <PaymentCategory/>
+      <Offer/>
+      <Suggestions/>
       </ScrollView>
     </SafeAreaView>
   );
@@ -33,6 +32,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   img: {
     width: '100%',
