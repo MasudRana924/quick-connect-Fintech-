@@ -9,7 +9,7 @@ const Register = () => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const { isCreated,isLoading} = useSelector(state => state.register);
+    const { isCreated, isLoading } = useSelector(state => state.register);
     const handleRegister = () => {
         const params = {
             phone: phone,
@@ -32,7 +32,7 @@ const Register = () => {
             }, 1000);
             return () => clearTimeout(timerId);
         }
-    }, [isCreated,dispatch,navigation]);
+    }, [isCreated, dispatch, navigation]);
 
     return (
         <View style={styles.container}>
@@ -45,6 +45,7 @@ const Register = () => {
                 style={styles.input}
                 placeholderTextColor="grey"
                 autoCapitalize="none"
+                keyboardType="numeric"
             />
             <TextInput
                 value={password}
@@ -52,6 +53,7 @@ const Register = () => {
                 onChangeText={setPassword}
                 style={styles.input}
                 placeholderTextColor="grey"
+                keyboardType="numeric"
             />
             <Pressable
                 style={styles.button}
@@ -69,7 +71,7 @@ const Register = () => {
                     <Text style={styles.createText}> Login</Text>
                 </TouchableOpacity>
             </View>
-            <Toast  />
+            <Toast />
         </View>
     );
 };

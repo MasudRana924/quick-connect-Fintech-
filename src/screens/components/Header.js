@@ -3,8 +3,10 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import avatarImg from '../../assets/man.png'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 const Header = () => {
     const { user } = useSelector(state => state.auth.userData);
+    const navigation = useNavigation();
     return (
         <View style={styles.header}>
             <View style={styles.userInfo}>
@@ -32,7 +34,7 @@ const Header = () => {
                 </View>
             </View>
             <View style={styles.actions}>
-                <TouchableOpacity onPress={() => console.log('Go to rewards')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
                     <Icon name="trophy-outline" style={styles.actionIcon}></Icon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => console.log('Go to notifications')}>

@@ -1,5 +1,7 @@
 import React from 'react';
-import { SafeAreaView,ScrollView,Pressable, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/reducers/auth/authSlice';
 const Settings = () => {
   const fakeData = [
     { id: 1, title: 'Item 1', description: 'Description for Item 1' },
@@ -13,21 +15,23 @@ const Settings = () => {
     { id: 9, title: 'Item 9', description: 'Description for Item 9' },
     { id: 10, title: 'Item 10', description: 'Description for Item 10' },
   ];
-    return (
-      <SafeAreaView style={styles.container}>
+  const dispatch = useDispatch();
+  return (
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Sticky Navbar/Header</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.content}>
+      {/* <ScrollView contentContainerStyle={styles.content}>
         {fakeData.map(item => (
           <View style={styles.item} key={item.id}>
             <Text style={styles.itemTitle}>{item.title}</Text>
             <Text>{item.description}</Text>
           </View>
         ))}
-      </ScrollView>
+      </ScrollView> */}
+      <Text onPress={() => dispatch(logout())}>Logout</Text>
     </SafeAreaView>
-    );
+  );
 };
 
 export default Settings;
@@ -64,45 +68,45 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-    // container: {
-    //   flex: 1,
-    //   paddingHorizontal: '5%',
-    //   paddingTop:20
-    // },
-    // img: {
-    //   width: '100%',
-    //   height: 200,
-    //   resizeMode: 'cover',
-    //   borderTopLeftRadius: 20,
-    //   borderTopRightRadius: 20,
-    // },
-    // title: {
-    //   fontSize: 18,
-    //   fontWeight: 'bold',
-    //   marginTop: 10,
-    // },
-    // price: {
-    //   fontSize: 18,
-    //   marginTop: 10,
-    // },
-    // cardBox: {
-    //   marginBottom: 30,
-    //   paddingBottom: 20,
-    //   borderRadius: 20,
-    //   backgroundColor: 'white',
-    //   shadowColor: '#000',
-    //   shadowOffset: {
-    //     width: 0,
-    //     height: 2,
-    //   },
-    //   shadowOpacity: 0.25,
-    //   shadowRadius: 3.84,
-  
-    //   elevation: 5,
-    // },
-    // footer: {
-    //   flexDirection: 'row',
-    //   justifyContent: 'space-between',
-    //   paddingHorizontal: 20,
-    // },
-  });
+  // container: {
+  //   flex: 1,
+  //   paddingHorizontal: '5%',
+  //   paddingTop:20
+  // },
+  // img: {
+  //   width: '100%',
+  //   height: 200,
+  //   resizeMode: 'cover',
+  //   borderTopLeftRadius: 20,
+  //   borderTopRightRadius: 20,
+  // },
+  // title: {
+  //   fontSize: 18,
+  //   fontWeight: 'bold',
+  //   marginTop: 10,
+  // },
+  // price: {
+  //   fontSize: 18,
+  //   marginTop: 10,
+  // },
+  // cardBox: {
+  //   marginBottom: 30,
+  //   paddingBottom: 20,
+  //   borderRadius: 20,
+  //   backgroundColor: 'white',
+  //   shadowColor: '#000',
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 2,
+  //   },
+  //   shadowOpacity: 0.25,
+  //   shadowRadius: 3.84,
+
+  //   elevation: 5,
+  // },
+  // footer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   paddingHorizontal: 20,
+  // },
+});

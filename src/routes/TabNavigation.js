@@ -3,9 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet} from 'react-native';
 import Home from '../screens/home/Home';
 import Settings from '../screens/settings/Settings';
-
 const Tab = createBottomTabNavigator();
-
 const TabNavigation = () => {
   return (
     <Tab.Navigator
@@ -25,9 +23,7 @@ const TabNavigation = () => {
     </Tab.Navigator>
   );
 };
-
 export default TabNavigation;
-
 const styles = StyleSheet.create({
   tabBarIconStyle: {
     display: 'none',

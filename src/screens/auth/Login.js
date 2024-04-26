@@ -41,6 +41,7 @@ const Login = () => {
         style={styles.input}
         placeholderTextColor="grey"
         autoCapitalize="none"
+        keyboardType="numeric"
       />
       <TextInput
         value={password}
@@ -48,6 +49,7 @@ const Login = () => {
         onChangeText={setPassword}
         style={styles.input}
         placeholderTextColor="grey"
+        keyboardType="numeric"
       />
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
         <Text style={styles.forgotText}>Forgot Password ?</Text>
