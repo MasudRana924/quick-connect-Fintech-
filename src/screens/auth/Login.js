@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/reducers/auth/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import Icon from 'react-native-vector-icons/Ionicons';
 const Login = () => {
   const navigation = useNavigation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const { userData, isLoading, error } = useSelector(state => state.auth);
+  const { isLoading, error } = useSelector(state => state.auth);
   const handlingLogin = () => {
     const params = {
       phone: phone,
@@ -22,7 +23,7 @@ const Login = () => {
     if (error) {
       Toast.show({
         type: 'error',
-        text1:error,
+        text1: error,
         position: 'top',
         duration: 2000,
         animationDuration: 250,
@@ -32,11 +33,14 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>QuickConnect</Text>
-      <Text style={styles.loginTitle}>Login to your account</Text>
+      <View style={styles.loginContainer}>
+        <Text style={styles.loginTitle}>Login to your account</Text>
+        <Icon style={{ color: '#20bf55', fontSize: 30 }} name="scan" size={24} color="white" />
+      </View>
 
       <TextInput
         value={phone}
-        placeholder="Phone"
+        placeholder="Account Number"
         onChangeText={setPhone}
         style={styles.input}
         placeholderTextColor="grey"
@@ -45,7 +49,7 @@ const Login = () => {
       />
       <TextInput
         value={password}
-        placeholder="Password"
+        placeholder="Pin"
         onChangeText={setPassword}
         style={styles.input}
         placeholderTextColor="grey"
@@ -78,21 +82,32 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    color: '#ef2d56',
+    color: '#20bf55',
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 50
+  },
+  loginContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
   },
   loginTitle: {
     fontSize: 24,
     color: 'black',
     fontWeight: 'bold',
-    textAlign: 'start',
-    marginBottom: 5
-},
+  },
+  qrText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#20bf55',
+  },
+
   input: {
     height: 45,
-    borderWidth: 2,
+    // borderWidth: 2,
+    borderBottomWidth: 1,
     borderRadius: 5,
     borderColor: 'black',
     paddingHorizontal: 20,

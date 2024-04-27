@@ -12,7 +12,7 @@ const MyButton = ({title, isLoading,onPress}) => {
 export default MyButton;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ef2d56',
+    backgroundColor: '#20bf55',
     borderRadius: 5,
     width: '100%',
     height: 45,

@@ -2,16 +2,46 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { takeAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
+import { addPhoneToStore, addtypeToStore } from '../../redux/reducers/transactions/sendSlice';
+import { useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 const CashOutNumber = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
     const handleGoBack = () => {
         navigation.goBack();
     };
-    const [receiverPhone, setReceiverPhone] = useState('');
+    const { user, token } = useSelector(state => state.auth.userData);
+    const [receiverphone, setReceiverPhone] = useState('');
+    const senderphone = user.phone
+    const type = 'Cash Out';
+    const receiverType = "Received Money";
+    const data = { receiverphone }
     const handleStore = () => {
-        // Your logic for handling store
+        dispatch(takeAgentNumber({
+            data, token
+        }));
+        dispatch(addPhoneToStore({ receiverphone, senderphone }));
+        dispatch(addtypeToStore({ type, receiverType }));
     };
+    const { success, errorr } = useSelector(
+        (state) => state.takeAgentNumber
+    );
+    useEffect(() => {
+        if (success) {
+            navigation.navigate('CashOutAmount');
+        } if (errorr) {
+            Toast.show({
+                type: 'error',
+                text1: errorr,
+                position: 'top',
+                duration: 2000,
+                animationDuration: 250,
+            });
+        }
+    }, [success, navigation, errorr]);
     return (
         <SafeAreaView>
             <View style={styles.navInfo}>
@@ -24,21 +54,28 @@ const CashOutNumber = () => {
                         <TextInput
                             style={styles.input}
                             placeholder="Account Number"
-                            value={receiverPhone}
+                            value={receiverphone}
                             onChangeText={setReceiverPhone}
                             keyboardType="numeric"
                         />
                         <TouchableOpacity
-                            style={[styles.button, receiverPhone.length === 11 ? styles.buttonActive : styles.buttonInactive]}
+                            style={[styles.button, receiverphone.length === 11 ? styles.buttonActive : styles.buttonInactive]}
                             onPress={handleStore}
-                            disabled={receiverPhone.length !== 11}
+                            disabled={receiverphone.length !== 11}
                         >
                             <Icon name="arrow-forward" size={24} color="white" />
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.helperText}>Enter 11 digit agent number</Text>
                 </View>
+                <View style={{ alignItems: 'center', marginTop: 20 }}>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#6B46C1', marginTop: 8, borderRadius: 8, width: '75%', height: 32 }}>
+                        <Icon style={{ color: '#6B46C1', fontSize: 20 }} name="scan" size={24} color="white" />
+                        <Text style={{ color: '#6B46C1', fontSize: 14, marginLeft: 10 }}>Tap to scan QR code</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
+            <Toast />
         </SafeAreaView>
     );
 };
@@ -48,7 +85,7 @@ const styles = StyleSheet.create({
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ef2d56',
+        backgroundColor: '#20bf55',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -76,7 +113,7 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderColor: '#ccc',
         borderRadius: 5,
         paddingHorizontal: 12,
@@ -90,10 +127,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ef2d56', // Set button color here
+        backgroundColor: '#20bf55', // Set button color here
     },
     buttonActive: {
-        backgroundColor: '#ef2d56',
+        backgroundColor: '#20bf55',
     },
     buttonInactive: {
         backgroundColor: 'gray',

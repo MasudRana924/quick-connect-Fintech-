@@ -3,7 +3,7 @@ import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, Image, ScrollVi
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
+// import LottieView from 'lottie-react-native';
 import coinanimation from '../../assets/coin.json'
 const Reward = () => {
     const { user } = useSelector(state => state.auth.userData);
@@ -26,7 +26,7 @@ const Reward = () => {
                             </View>
                             <View>
                                 <View style={styles.lottieContainer}>
-                                    <LottieView source={coinanimation} autoPlay loop style={styles.animation} />
+                                    {/* <LottieView source={coinanimation} autoPlay loop style={styles.animation} /> */}
                                     <Text style={styles.point}>{user?.point}</Text>
                                 </View>
                             </View>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ef2d56',
+        backgroundColor: '#20bf55',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     point: {
-        color: '#ef2d56',
+        color: '#20bf55',
         fontSize: 16,
         marginTop: 10
     },
@@ -140,12 +140,12 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     starIcon:{
-        color: '#ef2d56',
+        color: '#20bf55',
         fontSize: 20,
         marginLeft: 5,
     },
     pointInformationTitle:{
-        color: '#ef2d56',
+        color: '#20bf55',
         marginLeft: 5,
         marginRight:10
     }

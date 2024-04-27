@@ -40,7 +40,7 @@ const Register = () => {
             <Text style={styles.createTitle}>Create an account </Text>
             <TextInput
                 value={phone}
-                placeholder="Phone"
+                placeholder="Account Number"
                 onChangeText={setPhone}
                 style={styles.input}
                 placeholderTextColor="grey"
@@ -49,7 +49,7 @@ const Register = () => {
             />
             <TextInput
                 value={password}
-                placeholder="Password"
+                placeholder="Set Pin"
                 onChangeText={setPassword}
                 style={styles.input}
                 placeholderTextColor="grey"
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 36,
-        color: '#ef2d56',
+        color: '#20bf55',
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 50
@@ -100,13 +100,14 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 45,
-        borderWidth: 2,
+        // borderWidth: 2,
+        borderBottomWidth: 1,
         borderRadius: 5,
         borderColor: 'black',
         paddingHorizontal: 20,
     },
     button: {
-        backgroundColor: '#ef2d56',
+        backgroundColor: '#20bf55',
         borderRadius: 5,
         width: '100%',
         height: 45,
