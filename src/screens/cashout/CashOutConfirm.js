@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity,ScrollView,Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCashOut } from '../../redux/reducers/transactions/cashOutSlice';
 import { clearStore } from '../../redux/reducers/transactions/sendSlice';
+import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
 
 const CashOutConfirm = () => {
     const navigation = useNavigation();
@@ -23,11 +24,10 @@ const CashOutConfirm = () => {
             data, token
         }));
         dispatch(clearStore());
+        dispatch(clearAgentNumber());
     };
-    const { isLoading } = useSelector(state => state.cashOut);
-
-    const modalVisible = isLoading;
-
+    const { transactions,success } = useSelector(state => state.cashOut.cashout);
+    const modalVisible = success;
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.navInfo}>
@@ -38,8 +38,13 @@ const CashOutConfirm = () => {
                 <ScrollView contentContainerStyle={styles.content}>
                     <Text style={styles.receiverPhoneTitle}>To</Text>
                     <Text style={styles.receiverPhone}>Account Number {receiverphone}</Text>
-                    <Text style={styles.receiverPhone}>Total  Amount {amount} TK</Text>
+                    <View style={{ marginTop: 20, flexDirection: 'row',justifyContent: 'space-between' }}>
+                        <Text>Amount {amount}</Text>
+                        <Text style={{ marginLeft: 30 , fontSize:12}}>Charge 0</Text>
+                        <Text style={{ marginLeft: 40 }}>Total {amount}</Text>
+                    </View>
                 </ScrollView>
+
                 <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
                     <Text style={styles.confirmButtonText}>Confirm</Text>
                 </TouchableOpacity>
@@ -54,7 +59,12 @@ const CashOutConfirm = () => {
                     }}
                 >
                     <View style={styles.modalContainer}>
-                        <Text>Loading...</Text>
+                        <View>
+                            <Text style={{fontSize:18}}>প্রাপক</Text>
+                            <View>
+                                <Text>{transactions.receiverphone}</Text>
+                            </View>
+                        </View>
                     </View>
                 </Modal>
             )}
@@ -67,6 +77,8 @@ export default CashOutConfirm;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
+        height: '100%'
     },
     navInfo: {
         flexDirection: 'row',
@@ -99,7 +111,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#e9ecef',
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         marginTop: 40,
         backgroundColor: 'white',
     },
@@ -142,7 +154,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: 'white',
         borderColor: 'white',
-        height: '90%',
+        height: '100%',
         marginVertical: '5%',
     },
 });

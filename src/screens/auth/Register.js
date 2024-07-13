@@ -15,7 +15,8 @@ const Register = () => {
             phone: phone,
             password: password,
         };
-        dispatch(createAccount(params));
+        navigation.navigate('Otp-Verify');
+        // dispatch(createAccount(params));
     };
     useEffect(() => {
         if (isCreated) {
@@ -34,13 +35,13 @@ const Register = () => {
         }
     }, [isCreated, dispatch, navigation]);
 
-    return (
+  return (
         <View style={styles.container}>
-            <Text style={styles.title}>QuickConnect</Text>
+            <Text style={styles.title}>QuickPay</Text>
             <Text style={styles.createTitle}>Create an account </Text>
             <TextInput
                 value={phone}
-                placeholder="Account Number"
+                placeholder="Phone"
                 onChangeText={setPhone}
                 style={styles.input}
                 placeholderTextColor="grey"
@@ -49,7 +50,7 @@ const Register = () => {
             />
             <TextInput
                 value={password}
-                placeholder="Set Pin"
+                placeholder="Pin"
                 onChangeText={setPassword}
                 style={styles.input}
                 placeholderTextColor="grey"
@@ -58,7 +59,7 @@ const Register = () => {
             <Pressable
                 style={styles.button}
                 onPress={handleRegister}
-                className="bg-violet-500 font-semibold text-2xl"
+                className=" font-semibold text-2xl"
             >
                 <Text style={styles.buttonText}>Register</Text>
                 {isLoading && <ActivityIndicator size="small" color={'white'} />}
@@ -67,7 +68,7 @@ const Register = () => {
                 <Text>
                     Already have an account?
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Otp-Verify')}>
                     <Text style={styles.createText}> Login</Text>
                 </TouchableOpacity>
             </View>
@@ -83,31 +84,31 @@ const styles = StyleSheet.create({
         gap: 20,
         paddingTop: 200,
         paddingHorizontal: '5%',
+        backgroundColor: 'white',
     },
     title: {
-        fontSize: 36,
-        color: '#20bf55',
+        fontSize: 26,
+        color: '#E2136E',
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 50
     },
     createTitle: {
-        fontSize: 24,
+        fontSize: 20,
         color: 'black',
-        fontWeight: 'bold',
         textAlign: 'start',
         marginBottom: 5
     },
     input: {
         height: 45,
-        // borderWidth: 2,
         borderBottomWidth: 1,
         borderRadius: 5,
-        borderColor: 'black',
+        borderColor: '#E5E8E8',
+        backgroundColor:'#E5E8E8',
         paddingHorizontal: 20,
     },
     button: {
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         borderRadius: 5,
         width: '100%',
         height: 45,
@@ -115,7 +116,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         gap: 10,
-
     },
     buttonText: {
         color: 'white',
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     },
     createText: {
         marginLeft: 4,
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'black'
+        fontSize: 14,
+        fontWeight: 'semibold',
+        color: '#E2136E'
     }
 });

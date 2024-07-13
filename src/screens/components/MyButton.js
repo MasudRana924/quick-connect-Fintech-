@@ -4,15 +4,18 @@ import React from 'react';
 const MyButton = ({title, isLoading,onPress}) => {
   return (
     <Pressable onPress={onPress} style={styles.container}>
+    {!isLoading ? (
       <Text style={styles.title}>{title}</Text>
-      {isLoading && <ActivityIndicator size="small" color={'white'} />}
-    </Pressable>
+    ) : (
+      <ActivityIndicator size="small" color={'white'} />
+    )}
+  </Pressable>
   );
 };
 export default MyButton;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#20bf55',
+    backgroundColor: '#E2136E',
     borderRadius: 5,
     width: '100%',
     height: 45,

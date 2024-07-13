@@ -48,7 +48,7 @@ const Header = () => {
 export default Header;
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     },
     actionIcon: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 20,
         marginLeft: 20, // Increase margin for separation
     },
 });

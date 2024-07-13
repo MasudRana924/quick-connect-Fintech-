@@ -39,11 +39,6 @@ const storeTypeSlice = createSlice({
             state.amount = [];
             state.password = [];
             state.qrcode = [];
-            // AsyncStorage.setItem("sendType", JSON.stringify(state.type));
-            // AsyncStorage.setItem("receiverphone", JSON.stringify(state.receiverphone));
-            // AsyncStorage.setItem("amount", JSON.stringify(state.amount));
-            // AsyncStorage.setItem("setPassword", JSON.stringify(state.password));
-            // AsyncStorage.setItem("setQR", JSON.stringify(state.qrcode));
         },
     },
 });

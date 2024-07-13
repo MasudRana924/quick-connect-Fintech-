@@ -16,14 +16,14 @@ const Home = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header />
       <ScrollView>
-      <PaymentCategory/>
-      <Offer/>
-      <Suggestions/>
+        <PaymentCategory />
+        {/* <Offer/> */}
+        {/* <Suggestions/> */}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -32,7 +32,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
   },
   img: {
     width: '100%',

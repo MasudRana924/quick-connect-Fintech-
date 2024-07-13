@@ -43,7 +43,7 @@ const CashOutPin = () => {
         }
     }, [success, navigation, errorr]);
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.mainContainer}>
         <View style={styles.navInfo}>
             <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
             <Text style={styles.title}>Cash Out</Text>
@@ -66,7 +66,7 @@ const CashOutPin = () => {
                         onPress={handleStore}
                         disabled={!isPinValid}
                     >
-                        <Icon name="arrow-forward" size={24} color="white" />
+                        <Icon name="arrow-forward" size={24} color="black" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -78,6 +78,10 @@ const CashOutPin = () => {
 
 export default CashOutPin;
 const styles = StyleSheet.create({
+    mainContainer:{
+        backgroundColor:"white",
+        height:'100%'
+    },
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -137,7 +141,7 @@ const styles = StyleSheet.create({
         width: 48,
         height: 48,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: 'white',
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#20bf55',
     },
     buttonInactive: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
     },
     helperText: {
         marginTop: 8,

@@ -32,10 +32,10 @@ const Login = () => {
   }, [error]);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>QuickConnect</Text>
+      <Text style={styles.title}>QuickPay</Text>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginTitle}>Login to your account</Text>
-        <Icon style={{ color: '#20bf55', fontSize: 30 }} name="scan" size={24} color="white" />
+        <Text style={styles.loginTitle}>Login </Text>
+        <Icon style={{ color: '#E2136E', fontSize: 20 }} name="scan" size={24} color="white" />
       </View>
 
       <TextInput
@@ -56,7 +56,7 @@ const Login = () => {
         keyboardType="numeric"
       />
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text style={styles.forgotText}>Forgot Password ?</Text>
+        <Text style={styles.forgotText}>Forgot Pin ?</Text>
       </TouchableOpacity>
       <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} />
       <View style={styles.createContainer}>
@@ -79,10 +79,11 @@ const styles = StyleSheet.create({
     gap: 20,
     paddingTop: 200,
     paddingHorizontal: '5%',
+    backgroundColor: 'white',
   },
   title: {
-    fontSize: 36,
-    color: '#20bf55',
+    fontSize: 26,
+    color: '#E2136E',
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 50
@@ -94,27 +95,28 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   loginTitle: {
-    fontSize: 24,
-    color: 'black',
-    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'black'
   },
   qrText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#20bf55',
+    color: '#E2136E'
   },
 
   input: {
     height: 45,
-    // borderWidth: 2,
+    borderWidth: 2,
     borderBottomWidth: 1,
     borderRadius: 5,
-    borderColor: 'black',
+    borderColor: '#E5E8E8',
+    backgroundColor:'#E5E8E8',
     paddingHorizontal: 20,
   },
   forgotText: {
     textAlign: 'left',
-    fontSize: 14
+    fontSize: 14,
+    color:'#E2136E'
   },
   createContainer: {
     flexDirection: 'row',
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
   createText: {
     marginLeft: 4,
     fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black'
+    fontWeight: 'semibold',
+    color: '#E2136E'
   }
 });

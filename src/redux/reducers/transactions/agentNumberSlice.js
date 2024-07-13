@@ -23,7 +23,12 @@ export const takeAgentNumberSlice = createSlice({
     success: false,
     errorr:'',
   },
-
+  reducers: {clearAgentNumber: (state) => {
+    state.number = [],
+    isLoading= false,
+    success=false,
+    errorr=''
+  }},
   extraReducers: (builder) => {
     builder.addCase(takeAgentNumber.pending, (state) => {
       state.isLoading = true;
@@ -40,5 +45,5 @@ export const takeAgentNumberSlice = createSlice({
     });
   },
 });
-
+export const { clearAgentNumber } = takeAgentNumberSlice.actions;
 export default takeAgentNumberSlice.reducer;

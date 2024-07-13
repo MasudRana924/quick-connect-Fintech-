@@ -21,7 +21,7 @@ const CashOutAmount = () => {
 
     };
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.mainContainer}>
             <View style={styles.navInfo}>
                 <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Cash Out</Text>
@@ -33,7 +33,7 @@ const CashOutAmount = () => {
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.input}
-                            placeholder="Enter Amount "
+                            placeholder="ট 0"
                             value={amount}
                             onChangeText={setAmount}
                             keyboardType="numeric"
@@ -43,7 +43,7 @@ const CashOutAmount = () => {
                             onPress={handleStore}
                             disabled={!isAmountValid}
                         >
-                            <Icon name="arrow-forward" size={24} color="white" />
+                            <Icon name="arrow-forward" size={24} color="black" />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -54,6 +54,10 @@ const CashOutAmount = () => {
 
 export default CashOutAmount;
 const styles = StyleSheet.create({
+    mainContainer:{
+        backgroundColor:"white",
+        height:'100%'
+    },
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -108,12 +112,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
+        color:'#20bf55',
+        // fontWeight:'bold'
     },
     button: {
         width: 48,
         height: 48,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: 'white',
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -123,7 +129,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#20bf55',
     },
     buttonInactive: {
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
     },
     helperText: {
         marginTop: 8,
