@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
-import bikroyImg from '../../assets/bikroy.png';
-import darazImg from '../../assets/daraz.png';
-import tofeeImg from '../../assets/toffee.jpg';
-import bdJobsImg from '../../assets/bdjobs.jpg';
-import skillJobsImg from '../../assets/skilljobs.png';
-import tenImg from '../../assets/10.png';
+import bikroyImg from '../../../assets/bikroy.png';
+import darazImg from '../../../assets/daraz.png';
+import tofeeImg from '../../../assets/toffee.jpg';
+import bdJobsImg from '../../../assets/bdjobs.jpg';
+import skillJobsImg from '../../../assets/skilljobs.png';
+import tenImg from '../../../assets/10.png';
 const Suggestions = () => {
     return (
         <View style={styles.outerContainer}>

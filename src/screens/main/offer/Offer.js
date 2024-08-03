@@ -1,6 +1,6 @@
 import React from 'react';
 import { View,StyleSheet,Image } from 'react-native';
-import offerImg from '../../assets/offer.png';
+import offerImg from '../../../assets/offer.png';
 const Offer = () => {
     return (
         <View style={styles.container}>

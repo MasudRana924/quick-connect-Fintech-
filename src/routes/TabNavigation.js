@@ -13,7 +13,7 @@ const TabNavigation = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          let iconSize = 14; // Set the icon size here
+          let iconSize = 16; // Set the icon size here
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline'; // Adjust icon names based on your preference
@@ -44,11 +44,14 @@ export default TabNavigation;
 const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 12,
-    paddingBottom: 12,
-    backgroundColor: 'white',
+    paddingBottom: 4,
+    // backgroundColor: 'white',
+    
   },
   tabBarStyle: {
-    borderColor: 'white',
-    backgroundColor: 'white',
+    borderTopColor: '#f8f9fa',
+    // borderTopWidth: 1,
+    // borderColor: 'white',
+    backgroundColor: '#f8f9fa',
   },
 });

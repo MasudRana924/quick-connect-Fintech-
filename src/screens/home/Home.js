@@ -3,9 +3,15 @@ import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
-import PaymentCategory from '../main/PaymentCategory';
-import Offer from '../offer/Offer';
-import Suggestions from '../suggestions/Suggestions';
+import Services from '../main/Services';
+import Offer from '../main/offer/Offer';
+import Suggestions from '../main/suggestions/Suggestions';
+import Payment from '../main/payment/Payment';
+import Education from '../main/education/Education';
+import Entertainment from '../main/Entertainment/Entertainment';
+import Sports from '../main/sports/Sports';
+import Shopping from '../main/shopping/Shopping';
+import Tickets from '../main/tickets/Tickets';
 
 const Home = () => {
   const { navigate } = useNavigation();
@@ -19,7 +25,13 @@ const Home = () => {
     <View style={styles.container}>
       <Header />
       <ScrollView>
-        <PaymentCategory />
+        <Services />
+        <Payment/>
+        <Education/>
+        <Entertainment/>
+        <Sports/>
+        <Shopping/>
+        <Tickets/>
         {/* <Offer/> */}
         {/* <Suggestions/> */}
       </ScrollView>

@@ -10,10 +10,11 @@ import savingsImg from '../../assets/approved.png';
 import moreImg from '../../assets/app.png';
 import { useNavigation } from '@react-navigation/native';
 
-const PaymentCategory = () => {
+const Services = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
+            <Text>Services</Text>
             <View style={styles.gridContainer}>
                 <TouchableOpacity style={styles.gridItem}>
                     <Image source={sendImg} style={styles.moneyIcon} />
@@ -28,15 +29,11 @@ const PaymentCategory = () => {
                     <Text style={styles.title}>Recharge</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.gridItem}>
-                    <Image source={paymentImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Payment</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.gridContainer}>
-                <TouchableOpacity style={styles.gridItem}>
                     <Image source={addMoneyImg} style={styles.moneyIcon} />
                     <Text style={styles.title}>Add Money</Text>
                 </TouchableOpacity>
+            </View>
+            <View style={styles.gridContainer}>
                 <TouchableOpacity style={styles.gridItem}>
                     <Image source={savingsImg} style={styles.moneyIcon} />
                     <Text style={styles.title}>Savings</Text>
@@ -54,34 +51,38 @@ const PaymentCategory = () => {
     );
 };
 
-export default PaymentCategory;
+export default Services;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
+        // borderBottomColor: '#e9ecef', // Set the border color
+        // borderBottomWidth: 2,
     },
     gridContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         margin: 10,
+        gap:10,
+        flexWrap: 'wrap',
     },
     gridItem: {
         alignItems: 'center',
         justifyContent: 'center',
+        marginHorizontal: 10, // Add horizontal margin to create a gap
+        marginVertical: 10,
     },
     moneyIcon: {
-        height: 20,
-        width: 20,
-        borderRadius: 20,
+        height: 30,
+        width: 30,
         marginBottom: 6,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
     },
     title: {
-        fontSize: 10,
-        textAlign: 'start',
-        color:'##000000'
+        fontSize: 12,
+        textAlign: 'left',
+        color:'#000000',
+        marginTop:10,
+        fontWeight: '500',
     },
 });

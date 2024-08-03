@@ -58,20 +58,21 @@ const CashOutNumber = () => {
                             onChangeText={setReceiverPhone}
                             keyboardType="numeric"
                         />
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={[styles.button, receiverphone.length === 11 ? styles.buttonActive : styles.buttonInactive]}
                             onPress={handleStore}
                             disabled={receiverphone.length !== 11}
                         >
                             <Icon name="arrow-forward" size={24} color="black" />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
-                    <Text style={styles.helperText}>Enter 11 digit agent number</Text>
+                    {/* <Text style={styles.helperText}>Enter 11 digit agent number</Text> */}
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 20 }}>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#6B46C1', marginTop: 8, borderRadius: 8, width: '75%', height: 32 }}>
-                        <Icon style={{ color: '#6B46C1', fontSize: 20 }} name="scan" size={24} color="white" />
-                        <Text style={{ color: '#6B46C1', fontSize: 14, marginLeft: 10 }}>Tap to scan QR code</Text>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#ced4da', marginTop: 8, borderRadius: 8,
+                         width: '75%', height: 44 }}>
+                        <Icon style={{ color: '#E2136E', fontSize: 20 }} name="scan" size={24} color="white" />
+                        <Text style={{ color: '#E2136E', fontSize: 14, marginLeft: 10 }}>Tap to scan QR code</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -117,11 +118,12 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        borderBottomWidth: 1,
+        borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
+        height:50
     },
     button: {
         width: 48,
@@ -131,10 +133,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#20bf55', // Set button color here
+        backgroundColor: '#E2136E', // Set button color here
     },
     buttonActive: {
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
     },
     buttonInactive: {
         backgroundColor: 'white',
