@@ -1,112 +1,127 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, Pressable, StyleSheet, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { SafeAreaView, ScrollView, Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/reducers/auth/authSlice';
+import { useNavigation } from '@react-navigation/native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+// import avatar from '../../images/man.png';
+
 const Settings = () => {
-  const fakeData = [
-    { id: 1, title: 'Item 1', description: 'Description for Item 1' },
-    { id: 2, title: 'Item 2', description: 'Description for Item 2' },
-    { id: 3, title: 'Item 3', description: 'Description for Item 3' },
-    { id: 4, title: 'Item 4', description: 'Description for Item 4' },
-    { id: 5, title: 'Item 5', description: 'Description for Item 5' },
-    { id: 6, title: 'Item 6', description: 'Description for Item 6' },
-    { id: 7, title: 'Item 7', description: 'Description for Item 7' },
-    { id: 8, title: 'Item 8', description: 'Description for Item 8' },
-    { id: 9, title: 'Item 9', description: 'Description for Item 9' },
-    { id: 10, title: 'Item 10', description: 'Description for Item 10' },
-  ];
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  // const { user } = useSelector((state) => state.userdetails.userdetails);
+
+  const menuItems = [
+    { icon: <Entypo name="swap" size={24} color="#000814" />, label: 'Transactions', route: 'Transactions' },
+    { icon: <FontAwesome name="info-circle" size={24} color="#000814" />, label: 'Information', route: 'Information' },
+    { icon: <MaterialIcons name="notifications-none" size={24} color="#000814" />, label: 'Notification', route: 'Notifications' },
+    { icon: <MaterialIcons name="offline-share" size={24} color="#000814" />, label: 'Limit', route: 'Limit' },
+    { icon: <Entypo name="map" size={24} color="#000814" />, label: 'Map', route: 'Map' },
+    { icon: <MaterialIcons name="local-offer" size={24} color="#000814" />, label: 'Coupon', route: 'Coupon' },
+    { icon: <FontAwesome name="headphones" size={24} color="#000814" />, label: 'Support', route: 'Support' },
+    { icon: <AntDesign name="questioncircleo" size={24} color="#000814" />, label: 'About QuickPay', route: 'AboutQuickPay' },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Sticky Navbar/Header</Text>
+        <View style={styles.headerLeft}>
+        <Text style={styles.headerText}>Settings</Text>
+        </View>
       </View>
-      {/* <ScrollView contentContainerStyle={styles.content}>
-        {fakeData.map(item => (
-          <View style={styles.item} key={item.id}>
-            <Text style={styles.itemTitle}>{item.title}</Text>
-            <Text>{item.description}</Text>
-          </View>
+
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {menuItems.map((item, index) => (
+          <TouchableOpacity key={index} onPress={() => navigation.navigate(item.route)} style={styles.menuItem}>
+            <View style={styles.menuItemContent}>
+              {/* {item.icon} */}
+              <Text style={styles.menuItemText}>{item.label}</Text>
+            </View>
+            <AntDesign name="right" size={24} color="#888" />
+          </TouchableOpacity>
         ))}
-      </ScrollView> */}
-      <Text onPress={() => dispatch(logout())}>Logout</Text>
+        <View style={styles.logoutContainer}>
+          <Pressable style={styles.logoutButton} onPress={() => dispatch(logout())}>
+            <AntDesign name="logout" size={20} color="#fff" />
+            <Text style={styles.logoutText}>Logout</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default Settings;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   header: {
-    backgroundColor: '#fff', // Adjust background color as needed
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#E2136E',
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc', // Adjust border color as needed
-    zIndex: 1, // Ensure the header stays above the content
-    paddingTop: 36,
+    borderBottomColor: '#ccc',
+    zIndex: 1,
   },
-  headerText: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height:50
   },
-  content: {
-    flexGrow: 1,
+  headerText:{
+    paddingTop:15,
+    fontSize:16,
+    color:'white'
+
+  },
+  headerRight: {
+    justifyContent: 'center',
+  },
+  scrollContainer: {
     paddingHorizontal: 16,
-    paddingTop: 16,
+    paddingTop: 20,
   },
-  item: {
-    padding: 20,
-    marginBottom: 10,
-    backgroundColor: '#f9f9f9',
+  menuItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomColor: '#c5c3c6', // Set the border color
+    borderBottomWidth: 1,
+    marginTop:10
+  },
+  menuItemContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+   
+  },
+  menuItemText: {
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  logoutContainer: {
+    marginTop: 20,
+    paddingHorizontal: 10,
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#000814',
+    paddingVertical: 10,
     borderRadius: 5,
   },
-  itemTitle: {
+  logoutText: {
+    color: '#fff',
+    marginLeft: 10,
     fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
+    fontWeight: '500',
   },
-  // container: {
-  //   flex: 1,
-  //   paddingHorizontal: '5%',
-  //   paddingTop:20
-  // },
-  // img: {
-  //   width: '100%',
-  //   height: 200,
-  //   resizeMode: 'cover',
-  //   borderTopLeftRadius: 20,
-  //   borderTopRightRadius: 20,
-  // },
-  // title: {
-  //   fontSize: 18,
-  //   fontWeight: 'bold',
-  //   marginTop: 10,
-  // },
-  // price: {
-  //   fontSize: 18,
-  //   marginTop: 10,
-  // },
-  // cardBox: {
-  //   marginBottom: 30,
-  //   paddingBottom: 20,
-  //   borderRadius: 20,
-  //   backgroundColor: 'white',
-  //   shadowColor: '#000',
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2,
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 3.84,
-
-  //   elevation: 5,
-  // },
-  // footer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   paddingHorizontal: 20,
-  // },
 });

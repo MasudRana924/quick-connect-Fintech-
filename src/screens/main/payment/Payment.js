@@ -11,7 +11,7 @@ const Payment = () => {
   return (
   
       <View style={styles.container}>
-            <Text>Pay Bill</Text>
+            <Text style={styles.Title}>Pay Bill</Text>
             <View style={styles.gridContainer}>
                 <TouchableOpacity style={styles.gridItem}>
                     <Image source={electricityImg} style={styles.imageIcon} />
@@ -53,14 +53,19 @@ export default Payment;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
-        // borderBottomColor: '#e9ecef', // Set the border color
-        // borderBottomWidth: 2,
+        // padding: 10,
+        borderBottomColor: '#e9ecef', // Set the border color
+        borderBottomWidth: 1,
+        marginTop:10
+    },
+    Title:{
+        marginHorizontal: 20,
     },
     gridContainer: {
         flexDirection: 'row',
         // justifyContent: 'space-between',
-        margin: 10,
+        // margin: 10,
+        marginTop:10,
         gap:10,
         flexWrap: 'wrap',
     },
@@ -71,8 +76,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     imageIcon: {
-        height: 20,
-        width: 20,
+        height: 30,
+        width: 30,
         marginBottom: 6,
     },
     title: {

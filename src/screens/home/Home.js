@@ -12,13 +12,14 @@ import Entertainment from '../main/Entertainment/Entertainment';
 import Sports from '../main/sports/Sports';
 import Shopping from '../main/shopping/Shopping';
 import Tickets from '../main/tickets/Tickets';
+import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
 
 const Home = () => {
   const { navigate } = useNavigation();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getAllProducts());
+    dispatch(clearAgentNumber())
   }, []);
 
   return (

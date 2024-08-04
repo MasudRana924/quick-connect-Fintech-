@@ -19,7 +19,7 @@ const AppNavigation = () => {
   const { userData } = useSelector(state => state.auth);
   return (
     <NavigationContainer>
-       <StatusBar style="dark" backgroundColor="#E2136E" />
+       {/* <StatusBar style="dark" backgroundColor="#E2136E" /> */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {userData ? (
           <Stack.Group>

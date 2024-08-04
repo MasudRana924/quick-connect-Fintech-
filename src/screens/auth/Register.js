@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     input: {
-        height: 45,
+        height: 50,
         borderBottomWidth: 1,
         borderRadius: 5,
         borderColor: '#E5E8E8',

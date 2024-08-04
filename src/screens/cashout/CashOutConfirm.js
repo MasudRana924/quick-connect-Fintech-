@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity,ScrollView,Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -36,7 +36,7 @@ const CashOutConfirm = () => {
         <SafeAreaView style={styles.container}>
              <Spinner
                 visible={isLoading}
-                textContent={'Loading...'}
+                // textContent={'Loading...'}
                 textStyle={styles.spinnerTextStyle}
             />
             <View style={styles.navInfo}>
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        height: 100,
-        paddingTop: 20
+        height: 60,
+        paddingTop: 10
     },
     arrowIcon: {
         color: 'white',

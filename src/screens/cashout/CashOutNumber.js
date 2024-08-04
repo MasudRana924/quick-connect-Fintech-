@@ -49,7 +49,7 @@ const CashOutNumber = () => {
         <SafeAreaView style={styles.mainContainer}>
             <Spinner
                 visible={isLoading}
-                textContent={'Loading...'}
+                // textContent={'Loading...'}
                 textStyle={styles.spinnerTextStyle}
             />
             <View style={styles.navInfo}>
@@ -80,11 +80,7 @@ const CashOutNumber = () => {
                 onPress={handleStore}
                 disabled={receiverphone.length !== 11}
             >
-                {isLoading ? (
-                    <Text style={styles.buttonText}>Loading...</Text>
-                ) : (
-                    <Text style={styles.buttonText}>Proceed</Text>
-                )}
+                 <Text style={styles.buttonText}>Proceed</Text>
             </TouchableOpacity>
             <Toast />
         </SafeAreaView>
@@ -105,8 +101,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        height: 100,
-        paddingTop: 20
+        height: 60,
+        paddingTop: 10
     },
     arrowIcon: {
         color: 'white',

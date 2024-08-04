@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        height: 100,
-        paddingTop: 20
+        height: 60,
+        paddingTop: 10
     },
     arrowIcon: {
         color: 'white',

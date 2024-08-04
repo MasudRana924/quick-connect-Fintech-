@@ -11,7 +11,7 @@ const Entertainment = () => {
   return (
 
     <View style={styles.container}>
-          <Text>Entertainment</Text>
+          <Text style={styles.Title}>Entertainment</Text>
           <View style={styles.gridContainer}>
               <TouchableOpacity style={styles.gridItem}>
                   <Image source={bongoImg} style={styles.imageIcon} />
@@ -54,13 +54,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        // borderBottomColor: '#e9ecef', // Set the border color
-        // borderBottomWidth: 2,
+        borderBottomColor: '#e9ecef', // Set the border color
+        borderBottomWidth: 1,
+        marginTop: 10,
+    },
+    Title:{
+        marginHorizontal: 20,
     },
     gridContainer: {
         flexDirection: 'row',
         // justifyContent: 'space-between',
-        margin: 10,
+        marginTop: 10,
         gap:10,
         flexWrap: 'wrap',
     },

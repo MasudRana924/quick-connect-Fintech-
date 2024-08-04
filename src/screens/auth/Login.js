@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 20,
-    paddingTop: 200,
+    paddingTop: 130,
     paddingHorizontal: '5%',
     backgroundColor: 'white',
   },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    height: 45,
+    height: 50,
     borderWidth: 2,
     borderBottomWidth: 1,
     borderRadius: 5,

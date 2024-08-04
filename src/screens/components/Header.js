@@ -49,14 +49,14 @@ export default Header;
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#E2136E',
-        paddingHorizontal: 16,
+        paddingHorizontal: 12,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center', 
-        height: 100,
-        paddingTop:20
+        height: 80,
+        paddingTop:10
     },
     userInfo: {
         flexDirection: 'row',
