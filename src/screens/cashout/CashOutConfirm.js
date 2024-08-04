@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCashOut } from '../../redux/reducers/transactions/cashOutSlice';
 import { clearStore } from '../../redux/reducers/transactions/sendSlice';
 import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 const CashOutConfirm = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
@@ -26,10 +26,19 @@ const CashOutConfirm = () => {
         dispatch(clearStore());
         dispatch(clearAgentNumber());
     };
-    const { transactions,success } = useSelector(state => state.cashOut.cashout);
-    const modalVisible = success;
+    const { transactions,success,isLoading } = useSelector(state => state.cashOut.cashout);
+    useEffect(() => {
+        if (success) {
+            navigation.navigate('CashOutSuccess');
+        } 
+    }, [success, navigation]);
     return (
         <SafeAreaView style={styles.container}>
+             <Spinner
+                visible={isLoading}
+                textContent={'Loading...'}
+                textStyle={styles.spinnerTextStyle}
+            />
             <View style={styles.navInfo}>
                 <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Cash Out</Text>
@@ -49,25 +58,6 @@ const CashOutConfirm = () => {
                     <Text style={styles.confirmButtonText}>Confirm</Text>
                 </TouchableOpacity>
             </View>
-            {modalVisible && ( 
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                       
-                    }}
-                >
-                    <View style={styles.modalContainer}>
-                        <View>
-                            <Text style={{fontSize:18}}>প্রাপক</Text>
-                            <View>
-                                <Text>{transactions.receiverphone}</Text>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
-            )}
         </SafeAreaView>
     );
 };
@@ -83,7 +73,7 @@ const styles = StyleSheet.create({
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -135,8 +125,8 @@ const styles = StyleSheet.create({
     },
     confirmButton: {
         width: '100%',
-        backgroundColor: '#20bf55',
-        borderRadius: 5,
+        backgroundColor: '#E2136E',
+        // borderRadius: 5,
         paddingVertical: 12,
         paddingHorizontal: 20,
         marginBottom: 0,
@@ -145,16 +135,5 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         textAlign: 'center',
-    },
-    modalContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '95%',
-        alignSelf: 'center',
-        borderWidth: 1,
-        backgroundColor: 'white',
-        borderColor: 'white',
-        height: '100%',
-        marginVertical: '5%',
     },
 });

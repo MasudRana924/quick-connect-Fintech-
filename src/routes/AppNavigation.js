@@ -13,6 +13,7 @@ import CashOutPin from '../screens/cashout/CashOutPin';
 import CashOutConfirm from '../screens/cashout/CashOutConfirm';
 import OtpVerify from '../screens/auth/OtpVerify';
 import { StatusBar } from 'expo-status-bar';
+import CashoutSuccess from '../screens/cashout/CashoutSuccess';
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   const { userData } = useSelector(state => state.auth);
@@ -28,6 +29,7 @@ const AppNavigation = () => {
             <Stack.Screen name="CashOutAmount" component={CashOutAmount} />
             <Stack.Screen name="CashOutPin" component={CashOutPin} />
             <Stack.Screen name="CashOutConfirm" component={CashOutConfirm} />
+            <Stack.Screen name="CashOutSuccess" component={CashoutSuccess} />
           </Stack.Group>
         ) : (
           <Stack.Group>

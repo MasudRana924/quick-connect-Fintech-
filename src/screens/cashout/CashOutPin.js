@@ -7,26 +7,27 @@ import { createTakePassword } from '../../redux/reducers/transactions/takePasswo
 import { addPasswordToStore } from '../../redux/reducers/transactions/sendSlice';
 import { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
+import Spinner from 'react-native-loading-spinner-overlay';
 const CashOutPin = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const handleGoBack = () => {
         navigation.goBack();
     };
-    const { receiverphone,amount} = useSelector(
+    const { receiverphone, amount } = useSelector(
         (state) => state.type
     );
-    const {token } = useSelector(state => state.auth.userData);
+    const { token } = useSelector(state => state.auth.userData);
     const [password, setPassword] = useState();
     const isPinValid = !!password;
-    const data = {password }
+    const data = { password }
     const handleStore = () => {
         dispatch(createTakePassword({
             data, token
         }));
         dispatch(addPasswordToStore({ password }))
     };
-    const { success, errorr } = useSelector(
+    const { success, errorr, isLoading } = useSelector(
         (state) => state.takePassword
     );
     useEffect(() => {
@@ -44,48 +45,65 @@ const CashOutPin = () => {
     }, [success, navigation, errorr]);
     return (
         <SafeAreaView style={styles.mainContainer}>
-        <View style={styles.navInfo}>
-            <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
-            <Text style={styles.title}>Cash Out</Text>
-        </View>
-        <ScrollView>
-        <View style={styles.container}>
-                <Text style={styles.receiverPhoneTitle}>To</Text>
-                <Text style={styles.receiverPhone}>Account Number {receiverphone?.receiverphone}</Text>
-                <Text style={styles.receiverPhone}>Amount {amount?.amount}</Text>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Enter Pin "
-                        value={password}
-                        onChangeText={setPassword}
-                        keyboardType="numeric"
-                    />
-                     <TouchableOpacity
+            <Spinner
+                visible={isLoading}
+                textContent={'Loading...'}
+                textStyle={styles.spinnerTextStyle}
+            />
+            <View style={styles.navInfo}>
+                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
+                <Text style={styles.title}>Cash Out</Text>
+            </View>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={styles.receiverPhoneTitle}>To</Text>
+                    <Text style={styles.receiverPhone}>Account Number {receiverphone?.receiverphone}</Text>
+                    <Text style={styles.receiverPhone}>Amount {amount?.amount}</Text>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Pin "
+                            value={password}
+                            onChangeText={setPassword}
+                            keyboardType="numeric"
+                        />
+                        {/* <TouchableOpacity
                         style={[styles.button, isPinValid ? styles.buttonActive : styles.buttonInactive]}
                         onPress={handleStore}
                         disabled={!isPinValid}
                     >
                         <Icon name="arrow-forward" size={24} color="black" />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                    </View>
                 </View>
-            </View>
-        </ScrollView>
-        <Toast />
-    </SafeAreaView>
+            </ScrollView>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={handleStore}
+
+            >
+                {/* {isLoading ? (
+                    <Text style={styles.buttonText}>Loading...</Text>
+                ) : (
+                    <Text style={styles.buttonText}>Proceed</Text>
+                )} */}
+                  <Text style={styles.buttonText}>Proceed</Text>
+            </TouchableOpacity>
+            <Toast />
+        </SafeAreaView>
     );
 };
 
 export default CashOutPin;
 const styles = StyleSheet.create({
-    mainContainer:{
-        backgroundColor:"white",
-        height:'100%'
+    mainContainer: {
+        backgroundColor: "white",
+        height: '100%'
     },
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -111,47 +129,42 @@ const styles = StyleSheet.create({
         borderColor: '#e9ecef',
         borderRadius: 5,
         padding: 5,
-        marginTop:40,
+        marginTop: 40,
         backgroundColor: 'white',
     },
-    receiverPhoneTitle:{
-        fontSize:16,
+    receiverPhoneTitle: {
+        fontSize: 16,
         alignSelf: 'flex-start',
     },
-    receiverPhone:{
-        fontSize:12,
+    receiverPhone: {
+        fontSize: 12,
         alignSelf: 'flex-start',
-        marginTop:10
+        marginTop: 10
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop:20,
-        paddingBottom:20
+        marginTop: 20,
+        paddingBottom: 20
     },
     input: {
         flex: 1,
-        borderBottomWidth: 1,
-         borderColor: '#ccc',
+        borderWidth: 1,
+        borderColor: '#ccc',
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
+        height: 50
     },
     button: {
-        width: 48,
         height: 48,
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 5,
+        borderColor: '#E2136E',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#20bf55', // Set button color here
+        backgroundColor: '#E2136E',
     },
-    buttonActive: {
-        backgroundColor: '#20bf55',
-    },
-    buttonInactive: {
-        backgroundColor: 'white',
+    buttonText: {
+        color: 'white'
     },
     helperText: {
         marginTop: 8,

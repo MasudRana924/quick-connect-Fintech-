@@ -38,16 +38,23 @@ const CashOutAmount = () => {
                             onChangeText={setAmount}
                             keyboardType="numeric"
                         />
-                         <TouchableOpacity
+                         {/* <TouchableOpacity
                             style={[styles.button, isAmountValid ? styles.buttonActive : styles.buttonInactive]}
                             onPress={handleStore}
                             disabled={!isAmountValid}
                         >
                             <Icon name="arrow-forward" size={24} color="black" />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
             </ScrollView>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={handleStore}
+               
+            >
+                <Text style={styles.buttonText}>Proceed</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 };
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#e9ecef',
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         marginTop:40,
         backgroundColor: 'white',
     },
@@ -107,29 +114,22 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        borderBottomWidth: 1,
-         borderColor: '#ccc',
+        borderWidth: 1,
+        borderColor: '#ccc',
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        color:'#20bf55',
-        // fontWeight:'bold'
+        height: 50
     },
     button: {
-        width: 48,
         height: 48,
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 5,
+        borderColor: '#E2136E',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#20bf55', // Set button color here
+        backgroundColor: '#E2136E',
     },
-    buttonActive: {
-        backgroundColor: '#20bf55',
-    },
-    buttonInactive: {
-        backgroundColor: 'white',
+    buttonText: {
+        color: 'white'
     },
     helperText: {
         marginTop: 8,
