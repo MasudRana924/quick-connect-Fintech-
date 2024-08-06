@@ -5,7 +5,7 @@ const Notification = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.noNotificationText}>No Notification</Text>
-      <Text style={styles.notificationInfoText}>Notifications will appear here</Text>
+      <Text style={styles.notificationInfoText}>New notifications will appear here</Text>
     </View>
   );
 };

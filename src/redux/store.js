@@ -8,6 +8,7 @@ import takeAgentNumberSlice  from './reducers/transactions/agentNumberSlice';
 import storeReducer from './reducers/transactions/sendSlice'
 import takePasswordSlice from './reducers/transactions/takePasswordSlice';
 import cashOutSlice from './reducers/transactions/cashOutSlice';
+import mytransactionsSlice from './reducers/transactions/myTransactionSlice';
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -17,7 +18,7 @@ const reducers = combineReducers({
   type:storeReducer,
   takePassword:takePasswordSlice,
   cashOut:cashOutSlice,
-
+  transactions:mytransactionsSlice,
 });
 
 const persistConfig = {

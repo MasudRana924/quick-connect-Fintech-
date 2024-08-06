@@ -33,8 +33,6 @@ const Home = () => {
         <Sports/>
         <Shopping/>
         <Tickets/>
-        {/* <Offer/> */}
-        {/* <Suggestions/> */}
       </ScrollView>
     </View>
   );
@@ -45,7 +43,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'white',
   },
   img: {
     width: '100%',
