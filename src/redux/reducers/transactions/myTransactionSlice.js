@@ -31,9 +31,9 @@ export const fetchOutTransactions = createAsyncThunk(
 
 export const fetchInTransactions = createAsyncThunk(
     'fetchInTransactions',
-    async ({ userToken }, { rejectWithValue }) => {
+    async ({ token }, { rejectWithValue }) => {
         try {
-            const transactions = await privateGet('/my/in/transactions', userToken);
+            const transactions = await privateGet('/my/in/transactions', token);
             return transactions;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -43,9 +43,9 @@ export const fetchInTransactions = createAsyncThunk(
 
 export const fetchLastThreeMonthsTransactions = createAsyncThunk(
     'fetchLastThreeMonthsTransactions',
-    async ({ userToken }, { rejectWithValue }) => {
+    async ({ token }, { rejectWithValue }) => {
         try {
-            const response = await privateGet('/last-three-months-transactions', userToken);
+            const response = await privateGet('/last-three-months-transactions', token);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);

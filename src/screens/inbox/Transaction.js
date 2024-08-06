@@ -1,101 +1,110 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchtransactions } from '../../redux/reducers/transactions/myTransactionSlice';
 import { Feather } from '@expo/vector-icons';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const Transaction = () => {
   const dispatch = useDispatch();
   const { token } = useSelector(state => state.auth.userData);
   const { transactions } = useSelector(state => state.transactions.mytransactions);
   const { isLoading } = useSelector(state => state.transactions);
-  const user = useSelector(state => state.auth.userData);
-
+  const user = useSelector(state => state.auth.userData.user);
   useEffect(() => {
     dispatch(fetchtransactions({ token }));
   }, [dispatch, token]);
-
-  useEffect(() => {
-    console.log("Fetched transactions:", transactions);
-  }, [transactions]);
-
-  return (
-    <ScrollView contentContainerStyle={styles.container} style={styles.scrollContainer}>
-      {transactions?.length > 0 ? transactions.map((transaction, index) => (
-        <View key={index} style={styles.card}>
-          <View style={styles.transactionContainer}>
+  const renderItem = ({ item: transaction }) => (
+    <View style={styles.card}>
+      <View style={styles.transactionContainer}>
+        <View style={styles.flexRow}>
+          <View>
+            {user._id === transaction.senduserId ? (
+              <Image
+                source={{ uri: transaction.receiveuserAvatar || user.avatarLogo }}
+                style={styles.avatar}
+              />
+            ) : user._id === transaction.receiveuserId ? (
+              <Image
+                source={{ uri: transaction.senderuserAvatar || user.avatarLogo }}
+                style={styles.avatar}
+              />
+            ) : null}
+          </View>
+          <View>
+            {user._id === transaction.senduserId ? (
+              <View>
+                <Text style={styles.textType}>{transaction.type}</Text>
+                <Text style={styles.textPhone}>{transaction.receiverphone}</Text>
+              </View>
+            ) : null}
+            {user._id === transaction.receiveuserId ? (
+              <View>
+                <Text style={styles.textType}>{transaction.receiverType}</Text>
+                <Text style={styles.textPhone}>{transaction.senderphone}</Text>
+              </View>
+            ) : null}
             <View style={styles.flexRow}>
-              <View>
-                {user._id === transaction.senduserId ? (
-                  <Image
-                    source={{ uri: transaction.receiveuserAvatar || user.avatarLogo }}
-                    style={styles.avatar}
-                  />
-                ) : user._id === transaction.receiveuserId ? (
-                  <Image
-                    source={{ uri: transaction.senderuserAvatar || user.avatarLogo }}
-                    style={styles.avatar}
-                  />
-                ) : null}
-              </View>
-              <View>
-                {user._id === transaction.senduserId ? (
-                  <View>
-                    {/* <Text style={styles.textType}>{transaction.type}</Text> */}
-                    <Text style={styles.textPhone}>{transaction.receiverphone}</Text>
-                  </View>
-                ) : null}
-                {user._id === transaction.receiveuserId ? (
-                  <View>
-                    <Text style={styles.textType}>{transaction.receiverType}</Text>
-                    <Text style={styles.textPhone}>{transaction.senderphone}</Text>
-                  </View>
-                ) : null}
-                <View style={styles.flexRow}>
-                  <Text style={styles.transactionId}>Trans ID : {transaction.tranId}</Text>
-                  <Feather name="copy" size={16} color="violet" onPress={() => {/* handle copy */}} />
-                </View>
-                <Text style={styles.date}>{new Date(transaction.createdAt).toLocaleDateString()}</Text>
-              </View>
+              <Text style={styles.transactionId}>Trans ID : {transaction.tranId}</Text>
+              <Feather name="copy" size={16} color="violet" onPress={() => {/* handle copy */}} />
             </View>
-            <View>
-              {user._id === transaction.senduserId ? (
-                <Text style={styles.amountOut}>- {transaction.amount}.00TK</Text>
-              ) : user._id === transaction.receiveuserId ? (
-                <Text style={styles.amountIn}>+ {transaction.amount}.00TK</Text>
-              ) : null}
-              <Text style={styles.charge}>Charge ট 0.00</Text>
-            </View>
+            <Text style={styles.date}>{new Date(transaction.createdAt).toLocaleDateString()}</Text>
           </View>
         </View>
-      )) : (
+        <View>
+          {user._id === transaction.senduserId ? (
+            <Text style={styles.amountOut}>- {transaction.amount}.00TK</Text>
+          ) : user._id === transaction.receiveuserId ? (
+            <Text style={styles.amountIn}>+ {transaction.amount}.00TK</Text>
+          ) : null}
+          <Text style={styles.charge}>Charge ট 0.00</Text>
+        </View>
+      </View>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Spinner
+        visible={isLoading}
+        // textContent={'Loading...'}
+        textStyle={styles.spinnerText}
+      />
+      {transactions?.length > 0 ? (
+        <FlatList
+          data={transactions}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={styles.listContentContainer}
+          style={styles.list}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
         <View style={styles.noTransactionContainer}>
           <Text style={styles.noTransactionText}>No Transaction</Text>
           <Text style={styles.transactionInfoText}>New transaction will appear here</Text>
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-  scrollContainer: {
     flex: 1,
+    padding: 10,
     backgroundColor: '#fff',
-    overflow: 'hidden',
+  },
+  listContentContainer: {
+    paddingBottom: 20,
+  },
+  list: {
+    width: '100%',
   },
   card: {
     width: '100%',
     marginVertical: 10,
     padding: 10,
-    // borderBottomWidth: 1,
-    // borderColor: '#ddd',
     backgroundColor: '#f9f9f9',
   },
   transactionContainer: {
@@ -106,15 +115,13 @@ const styles = StyleSheet.create({
   },
   flexRow: {
     flexDirection: 'row',
-    gap:5
+    gap: 5,
   },
   avatar: {
     height: 40,
     width: 40,
     borderRadius: 20,
-    marginTop: 2,
-    borderColor: 'gray',
-    borderWidth: 1,
+    marginTop: 8,
     padding: 1,
   },
   textType: {
@@ -122,28 +129,28 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontWeight: '500',
     marginLeft: 2,
-    // marginTop: 1,
+    marginTop: 1,
   },
   textPhone: {
     fontSize: 12,
     color: 'gray',
     fontWeight: '500',
     marginLeft: 2,
-    marginTop: 1,
+    marginTop: 2,
   },
   transactionId: {
     fontSize: 12,
     color: 'gray',
     fontWeight: '500',
     marginLeft: 2,
-    marginTop: 1,
+    marginTop: 2,
   },
   date: {
     fontSize: 12,
     color: 'gray',
     fontWeight: '500',
     marginLeft: 2,
-    marginTop: 1,
+    marginTop: 2,
   },
   amountOut: {
     fontSize: 12,
@@ -179,6 +186,9 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 14,
     marginTop: 10,
+  },
+  spinnerText: {
+    color: '#FFF',
   },
 });
 

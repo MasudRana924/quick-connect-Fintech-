@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
 import sendImg from '../../assets/taka (5).png';
 import cashOutImg from '../../assets/taka (6).png';
 import rechargeImg from '../../assets/money.png';
@@ -12,41 +12,47 @@ import { useNavigation } from '@react-navigation/native';
 
 const Services = () => {
     const navigation = useNavigation();
+
+    const services = [
+        { id: '1', title: 'Send Money', img: sendImg },
+        { id: '2', title: 'Cash Out', img: cashOutImg, navigate: 'CashOut' },
+        { id: '3', title: 'Recharge', img: rechargeImg },
+        { id: '4', title: 'Add Money', img: addMoneyImg },
+        { id: '5', title: 'Savings', img: savingsImg },
+        { id: '6', title: 'Loan', img: loanImg },
+        { id: '7', title: 'Payment', img: paymentImg },
+        { id: '8', title: 'More', img: moreImg },
+    ];
+
+    const renderItem = ({ item }) => (
+        <TouchableOpacity
+            style={styles.gridItem}
+            onPress={() => item.navigate && navigation.navigate(item.navigate)}
+        >
+            <Image source={item.img} style={styles.moneyIcon} />
+            <Text style={styles.title}>{item.title}</Text>
+        </TouchableOpacity>
+    );
+
+    const numColumns = 3;
+    const numRows = Math.ceil(services.length / numColumns);
+
+    // Add placeholder items if necessary
+    const servicesWithPlaceholders = [...services];
+    while (servicesWithPlaceholders.length % numColumns !== 0) {
+        servicesWithPlaceholders.push({ id: `placeholder-${servicesWithPlaceholders.length}`, placeholder: true });
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.Title}>Services</Text>
-            <View style={styles.gridContainer}>
-                <TouchableOpacity style={styles.gridItem}>
-                    <Image source={sendImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Send Money</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('CashOut')}>
-                    <Image source={cashOutImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Cash Out</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.gridItem}>
-                    <Image source={rechargeImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Recharge</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.gridItem}>
-                    <Image source={addMoneyImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Add Money</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.gridContainer}>
-                <TouchableOpacity style={styles.gridItem}>
-                    <Image source={savingsImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Savings</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.gridItem}>
-                    <Image source={loanImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>Loan</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.gridItem}>
-                    <Image source={moreImg} style={styles.moneyIcon} />
-                    <Text style={styles.title}>more</Text>
-                </TouchableOpacity>
-            </View>
+            <FlatList
+                data={servicesWithPlaceholders}
+                renderItem={({ item }) => item.placeholder ? <View style={[styles.gridItem, styles.placeholderItem]} /> : renderItem({ item })}
+                keyExtractor={(item) => item.id}
+                numColumns={numColumns}
+                contentContainerStyle={styles.gridContainer}
+            />
         </View>
     );
 };
@@ -56,26 +62,30 @@ export default Services;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderBottomColor: '#e9ecef', // Set the border color
-        borderBottomWidth: 1,
-        marginTop:10
+        marginTop: 10,
+        backgroundColor: 'white',
+        width: '100%',
     },
-    Title:{
+    Title: {
         marginHorizontal: 20,
+        fontSize: 14,
+        fontWeight: '500',
+        marginBottom:6,
+        paddingTop:10
     },
     gridContainer: {
-        flexDirection: 'row',
-        // justifyContent: 'space-between',
-        // margin: 10,
-        // gap:10,
-        flexWrap: 'wrap',
-        marginTop:10
+        justifyContent: 'space-between',
+        paddingHorizontal: 25,
     },
     gridItem: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal: 20, // Add horizontal margin to create a gap
-        marginVertical: 10,
+        margin: 10,
+        minWidth: 0, // Ensure items don't stretch unnecessarily
+    },
+    placeholderItem: {
+        backgroundColor: 'transparent',
     },
     moneyIcon: {
         height: 30,
@@ -84,9 +94,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 12,
-        textAlign: 'left',
-        color:'#000000',
-        marginTop:10,
+        textAlign: 'center',
+        color: '#000000',
+        marginTop: 10,
         fontWeight: '500',
     },
 });

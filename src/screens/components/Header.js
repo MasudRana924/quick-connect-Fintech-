@@ -10,12 +10,11 @@ const Header = () => {
     return (
         <View style={styles.header}>
             <View style={styles.userInfo}>
-                <TouchableOpacity onPress={() => console.log('Go to profile')}>
-                    {user?.avatarLogo ? (
-                        <Image source={avatarImg} style={styles.avatar} />
-                    ) : (
-                        <Image source={avatarImg} style={styles.avatar} />
-                    )}
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                    <Image
+                        source={user?.avatarLogo ? { uri: user.avatarLogo } : avatarImg}
+                        style={styles.avatar}
+                    />
                 </TouchableOpacity>
                 <View style={styles.userInfoText}>
                     {user?.firstname && user?.lastname ? (
@@ -37,9 +36,9 @@ const Header = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('Reward')}>
                     <Icon name="trophy-outline" style={styles.actionIcon}></Icon>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log('Go to notifications')}>
+                {/* <TouchableOpacity onPress={() => console.log('Go to notifications')}>
                     <Icon name="notifications" style={styles.actionIcon} ></Icon>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </View>
     );
@@ -54,26 +53,26 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center', 
-        height: 80,
-        paddingTop:10
+        alignItems: 'center',
+        height: 100,
+        paddingTop: 20
     },
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     avatar: {
-        width: 30,
-        height: 30,
-        borderRadius: 15, // Adjusted border radius
+        width: 40,
+        height: 40,
+        borderRadius: 20, // Adjusted border radius
         marginRight: 10, // Increase margin for separation
     },
     userInfoText: {
-        marginLeft: 10,
+        marginLeft: 12,
     },
     name: {
         color: 'white',
-        fontSize: 12,
+        fontSize: 14,
     },
     amountContainer: {
         flexDirection: 'row',
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     },
     actionIcon: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 30,
         marginLeft: 20, // Increase margin for separation
     },
 });

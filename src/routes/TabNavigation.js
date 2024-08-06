@@ -18,7 +18,7 @@ const TabNavigation = () => {
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline'; // Adjust icon names based on your preference
-          } else if (route.name === 'Settings') {
+          } else if (route.name === 'Account') {
             iconName = focused ? 'settings' : 'settings-outline';
           }else if (route.name === 'Inbox') {
             iconName = focused ? 'mail' : 'mail-outline'; // Adjust icon names based on your preference
@@ -38,7 +38,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Inbox" component={Inbox} />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen name="Account" component={Settings} />
     </Tab.Navigator>
   );
 };
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#f8f9fa',
     backgroundColor: '#f8f9fa',
     height:60,
-    paddingBottom:10
+    paddingBottom:10,
+    paddingTop:5
   },
 });

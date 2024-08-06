@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#20bf55',
+        backgroundColor: '#E2136E',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     point: {
-        color: '#20bf55',
+        color: 'black',
         fontSize: 16,
         marginTop: 10
     },
@@ -140,12 +140,12 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     starIcon:{
-        color: '#20bf55',
+        color: '#E2136E',
         fontSize: 20,
         marginLeft: 5,
     },
     pointInformationTitle:{
-        color: '#20bf55',
+        color: 'black',
         marginLeft: 5,
         marginRight:10
     }

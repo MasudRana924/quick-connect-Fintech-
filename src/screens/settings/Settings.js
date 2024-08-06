@@ -15,12 +15,12 @@ const Settings = () => {
   // const { user } = useSelector((state) => state.userdetails.userdetails);
 
   const menuItems = [
-    { icon: <Entypo name="swap" size={24} color="#000814" />, label: 'Transactions', route: 'Transactions' },
-    { icon: <FontAwesome name="info-circle" size={24} color="#000814" />, label: 'Information', route: 'Information' },
+    { icon: <FontAwesome name="info-circle" size={24} color="#000814" />, label: 'Account Information', route: 'Information' },
     { icon: <MaterialIcons name="notifications-none" size={24} color="#000814" />, label: 'Notification', route: 'Notifications' },
     { icon: <MaterialIcons name="offline-share" size={24} color="#000814" />, label: 'Limit', route: 'Limit' },
     { icon: <Entypo name="map" size={24} color="#000814" />, label: 'Map', route: 'Map' },
     { icon: <MaterialIcons name="local-offer" size={24} color="#000814" />, label: 'Coupon', route: 'Coupon' },
+    { icon: <FontAwesome name="headphones" size={24} color="#000814" />, label: 'Settings', route: 'Support' },
     { icon: <FontAwesome name="headphones" size={24} color="#000814" />, label: 'Support', route: 'Support' },
     { icon: <AntDesign name="questioncircleo" size={24} color="#000814" />, label: 'About QuickPay', route: 'AboutQuickPay' },
   ];
@@ -62,13 +62,24 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: '#E2136E',
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     zIndex: 1,
+    height: 100,
+    paddingTop: 20
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // textAlign:'center',
+    // backgroundColor: '#E2136E',
+    // paddingHorizontal: 16,
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#ccc',
+    // height: 100,
+    // paddingTop: 20
   },
   headerLeft: {
     flexDirection: 'row',
@@ -114,14 +125,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000814',
-    paddingVertical: 10,
+    backgroundColor: 'gray',
+    paddingVertical: 15,
     borderRadius: 5,
+    width:'100%'
   },
   logoutText: {
     color: '#fff',
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '500',
   },
 });
