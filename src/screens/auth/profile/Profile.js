@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowIcon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-// import QRCode from 'qrcode';
+
 const Profile = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
@@ -12,7 +12,6 @@ const Profile = () => {
     const handleGoBack = () => {
         navigation.goBack();
     };
-
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.navInfo}>
@@ -33,7 +32,6 @@ const Profile = () => {
                     ) : (
                         <Text style={styles.userName}>Mr. ABC</Text>
                     )}
-                    {/* <Image source={require('../../images/bangladesh.png')} style={styles.flag} /> */}
                 </View>
             </View>
             <View>
@@ -54,6 +52,13 @@ const Profile = () => {
                     <Text style={styles.optionText}>My QR Code</Text>
                     <Icon name="chevron-right" size={24} color="#ccc" />
                 </TouchableOpacity>
+            </View>
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
             </View>
         </SafeAreaView>
     );
@@ -84,27 +89,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 45,
     },
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#000814',
-        height: 56,
-        paddingHorizontal: 16,
-    },
-    headerText: {
-        color: '#fff',
-        fontSize: 20,
-        marginLeft: 16,
-    },
     profileContainer: {
         alignItems: 'center',
         padding: 16,
-        // borderBottomWidth: 1,
-        // borderBottomColor: '#ccc',
     },
     avatarContainer: {
         marginBottom: 16,
@@ -123,11 +110,6 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 8,
     },
-    flag: {
-        width: 40,
-        height: 30,
-        marginTop: 8,
-    },
     option: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -135,13 +117,17 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        marginTop:15
+        marginTop: 15
     },
     optionText: {
         flex: 1,
         fontSize: 16,
         color: '#333',
         marginLeft: 16,
+    },
+    qrCodeContainer: {
+        alignItems: 'center',
+        marginVertical: 20,
     },
 });
 

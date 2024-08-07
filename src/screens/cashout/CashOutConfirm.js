@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity,ScrollView,Modal } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,15 +26,15 @@ const CashOutConfirm = () => {
         dispatch(clearStore());
         dispatch(clearAgentNumber());
     };
-    const { transactions,success,isLoading } = useSelector(state => state.cashOut.cashout);
+    const { transactions, success, isLoading } = useSelector(state => state.cashOut.cashout);
     useEffect(() => {
         if (success) {
             navigation.navigate('CashOutSuccess');
-        } 
+        }
     }, [success, navigation]);
     return (
         <SafeAreaView style={styles.container}>
-             <Spinner
+            <Spinner
                 visible={isLoading}
                 // textContent={'Loading...'}
                 textStyle={styles.spinnerTextStyle}
@@ -44,13 +44,30 @@ const CashOutConfirm = () => {
                 <Text style={styles.title}>Cash Out</Text>
             </View>
             <View style={styles.contentContainer}>
+                <View style={styles.containerTop}>
+                    <Text style={styles.receiverPhoneTitle}>Recipient</Text>
+                    <View style={styles.flexContainer}>
+                        <TouchableOpacity style={styles.buttonZero}>
+                            <Text style={styles.buttonZeroText}>0</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.receiverPhone}>{receiverphone}</Text>
+                    </View>
+                </View>
+                
                 <ScrollView contentContainerStyle={styles.content}>
-                    <Text style={styles.receiverPhoneTitle}>To</Text>
-                    <Text style={styles.receiverPhone}>Account Number {receiverphone}</Text>
-                    <View style={{ marginTop: 20, flexDirection: 'row',justifyContent: 'space-between' }}>
-                        <Text>Amount {amount}</Text>
-                        <Text style={{ marginLeft: 30 , fontSize:12}}>Charge 0</Text>
-                        <Text style={{ marginLeft: 40 }}>Total {amount}</Text>
+                <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: 'space-between', gap: 20, width: '95%' }}>
+                        <View>
+                            <Text>Amount</Text>
+                            <Text style={{ fontSize: 12, marginTop: 8 }}>{amount}.00</Text>
+                        </View>
+                        <View>
+                            <Text >Charge </Text>
+                            <Text style={{ fontSize: 12, marginTop: 8 }}> 0.00 </Text>
+                        </View>
+                        <View>
+                            <Text >Total  </Text>
+                            <Text style={{ fontSize: 12, marginTop: 8 }}> {amount}.00 </Text>
+                        </View>
                     </View>
                 </ScrollView>
 
@@ -67,7 +84,7 @@ export default CashOutConfirm;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#e6e6e9',
         height: '100%'
     },
     navInfo: {
@@ -96,17 +113,45 @@ const styles = StyleSheet.create({
     },
     content: {
         alignItems: 'center',
-        width: '95%',
+        width: '100%',
         alignSelf: 'center',
         borderWidth: 1,
         borderColor: '#e9ecef',
         borderRadius: 5,
         padding: 10,
-        marginTop: 40,
+        marginTop: 10,
         backgroundColor: 'white',
     },
-    receiverPhoneTitle: {
+    containerTop: {
+        flex: 1,
+        alignItems: 'center',
+        width: '100%',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: '#e9ecef',
+        borderRadius: 5,
+        padding: 10,
+        backgroundColor: 'white',
+    },
+    flexContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
+        width: '100%',
+    },
+    buttonZero: {
+        marginRight: 10,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        backgroundColor: '#E2136E',
+        borderRadius: 5,
+    },
+    buttonZeroText: {
+        color: 'white',
         fontSize: 16,
+    },
+    receiverPhoneTitle: {
+        fontSize: 12,
         alignSelf: 'flex-start',
     },
     receiverPhone: {

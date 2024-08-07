@@ -1,25 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAmountToStore } from '../../redux/reducers/transactions/sendSlice';
+
 const CashOutAmount = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const handleGoBack = () => {
         navigation.goBack();
     };
-    const { receiverphone} = useSelector(
+    const { receiverphone } = useSelector(
         (state) => state.type.receiverphone
     );
-    const [amount, setAmount] = useState();
+    const { user } = useSelector(state => state.auth.userData);
+    const [amount, setAmount] = useState('');
     const isAmountValid = !!amount;
+
     const handleStore = () => {
         dispatch(addAmountToStore({ amount }));
         navigation.navigate('CashOutPin');
-
     };
+
+    const amountInputRef = useRef(null);
+
+    useEffect(() => {
+        if (amountInputRef.current) {
+            amountInputRef.current.focus();
+        }
+    }, []);
+
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.navInfo}>
@@ -27,31 +38,36 @@ const CashOutAmount = () => {
                 <Text style={styles.title}>Cash Out</Text>
             </View>
             <ScrollView>
-            <View style={styles.container}>
-                    <Text style={styles.receiverPhoneTitle}>To</Text>
-                    <Text style={styles.receiverPhone}>Account Number {receiverphone}</Text>
+                <View style={styles.containerTop}>
+                    <Text style={styles.receiverPhoneTitle}>Recipient</Text>
+                    <View style={styles.flexContainer}>
+                        <TouchableOpacity style={styles.buttonZero}>
+                            <Text style={styles.buttonZeroText}>0</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.receiverPhone}>{receiverphone}</Text>
+                    </View>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.receiverPhoneTitle}>Amount</Text>
                     <View style={styles.inputContainer}>
                         <TextInput
-                            style={styles.input}
+                            style={[styles.input, amount ? styles.inputTextRed : {}]}
                             placeholder="ট 0"
                             value={amount}
                             onChangeText={setAmount}
                             keyboardType="numeric"
+                            ref={amountInputRef}
+                            placeholderTextColor="#E2136E" 
+                            textAlign="center"
                         />
-                         {/* <TouchableOpacity
-                            style={[styles.button, isAmountValid ? styles.buttonActive : styles.buttonInactive]}
-                            onPress={handleStore}
-                            disabled={!isAmountValid}
-                        >
-                            <Icon name="arrow-forward" size={24} color="black" />
-                        </TouchableOpacity> */}
                     </View>
+                    <Text style={{alignItems: 'center', fontSize: 12}}>Available balance {user?.amount}.00</Text>
                 </View>
             </ScrollView>
             <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, isAmountValid ? styles.buttonActive : styles.buttonInactive]}
                 onPress={handleStore}
-               
+                disabled={!isAmountValid}
             >
                 <Text style={styles.buttonText}>Proceed</Text>
             </TouchableOpacity>
@@ -60,10 +76,11 @@ const CashOutAmount = () => {
 };
 
 export default CashOutAmount;
+
 const styles = StyleSheet.create({
-    mainContainer:{
-        backgroundColor:"white",
-        height:'100%'
+    mainContainer: {
+        backgroundColor: '#e6e6e9',
+        height: '100%'
     },
     navInfo: {
         flexDirection: 'row',
@@ -85,41 +102,70 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 45,
     },
-    container: {
+    containerTop: {
         flex: 1,
         alignItems: 'center',
-        width: '95%',
+        width: '100%',
         alignSelf: 'center',
         borderWidth: 1,
         borderColor: '#e9ecef',
         borderRadius: 5,
         padding: 10,
-        marginTop:40,
         backgroundColor: 'white',
     },
-    receiverPhoneTitle:{
-        fontSize:16,
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        width: '100%',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: '#e9ecef',
+        borderRadius: 5,
+        padding: 10,
+        marginTop: 10,
+        backgroundColor: 'white',
+    },
+    receiverPhoneTitle: {
+        fontSize: 12,
         alignSelf: 'flex-start',
     },
-    receiverPhone:{
-        fontSize:12,
-        alignSelf: 'flex-start',
-        marginTop:10
-    },
-    inputContainer: {
+    flexContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop:20,
-        paddingBottom:20
+        marginTop: 10,
+        width: '100%',
+    },
+    buttonZero: {
+        marginRight: 10,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        backgroundColor: '#E2136E',
+        borderRadius: 5,
+    },
+    buttonZeroText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    receiverPhone: {
+        fontSize: 12,
+        flex: 1,
+    },
+    inputContainer: {
+        marginTop: 20,
+        paddingBottom: 20,
+        width: '100%', // Ensure the container takes the full width
     },
     input: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        height: 50
+        height: 50,
+        width: '100%',
+        backgroundColor: '#fff',
+       
+    },
+    inputTextRed: {
+        color: '#E2136E', 
     },
     button: {
         height: 48,
@@ -131,10 +177,15 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white'
     },
+    buttonActive: {
+        opacity: 1,
+    },
+    buttonInactive: {
+        opacity: 0.5,
+    },
     helperText: {
         marginTop: 8,
         fontSize: 12,
         color: '#888',
     },
 });
-

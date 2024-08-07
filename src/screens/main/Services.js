@@ -9,7 +9,7 @@ import loanImg from '../../assets/salary.png';
 import savingsImg from '../../assets/approved.png';
 import moreImg from '../../assets/app.png';
 import { useNavigation } from '@react-navigation/native';
-
+import Icon from 'react-native-vector-icons/FontAwesome6';
 const Services = () => {
     const navigation = useNavigation();
 
@@ -71,7 +71,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         marginBottom:6,
-        paddingTop:10
+        padding:10,
+        borderBottomWidth:1,
+        borderBottomColor:'#e5e5e5'
     },
     gridContainer: {
         justifyContent: 'space-between',
@@ -88,8 +90,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     moneyIcon: {
-        height: 30,
-        width: 30,
+        height: 40,
+        width: 40,
         marginBottom: 6,
     },
     title: {

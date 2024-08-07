@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     },
     flag: {
         width: 40,
-        height: 30,
+        height: 40,
         marginTop: 8,
     },
     option: {

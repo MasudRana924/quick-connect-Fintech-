@@ -18,7 +18,7 @@ const CashoutSuccess = () => {
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.container}>
                 <View style={styles.receiverInfo}>
-                    <Text style={styles.receiverTitle}>প্রাপক</Text>
+                    <Text style={styles.receiverTitle}>Recipient</Text>
                     <View style={styles.receiverDetails}>
                         {/* <BiUserCircle style={styles.userIcon} /> */}
                         <Text style={styles.receiverPhone}>{transactions.receiverphone}</Text>
@@ -27,16 +27,16 @@ const CashoutSuccess = () => {
 
                 <View style={styles.transactionDetails}>
                     <View style={styles.detailRow}>
-                        <Text style={styles.detailTitle}>ট্রানজেকশন আইডি</Text>
+                        <Text style={styles.detailTitle}>Trx ID</Text>
                         <Text style={styles.detailValue}>{transactions.tranId}</Text>
                     </View>
                     <View style={styles.detailRow}>
-                        <Text style={styles.detailTitle}>সর্বমোট</Text>
-                        <Text style={styles.detailValue}>{transactions.amount}.00 TK</Text>
+                        <Text style={styles.detailTitle}>Amount</Text>
+                        <Text style={styles.detailValue}>{transactions.amount}.00 </Text>
                     </View>
                     <View style={styles.detailRow}>
-                        <Text style={styles.detailTitle}>চার্জ</Text>
-                        <Text style={styles.detailValue}>00.00 TK</Text>
+                        <Text style={styles.detailTitle}>Charge</Text>
+                        <Text style={styles.detailValue}>00.00 </Text>
                     </View>
                 </View>
 
@@ -62,8 +62,8 @@ export default CashoutSuccess;
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white',
-        padding: 16,
+        backgroundColor: '#e6e6e9',
+        // padding: 16,
     },
     container: {
         flex: 1,
@@ -71,9 +71,10 @@ const styles = StyleSheet.create({
     receiverInfo: {
         backgroundColor: '#f3f4f6',
         height: 80,
-        borderRadius: 10,
         padding: 8,
         marginBottom: 16,
+        width:'100%',
+        marginTop:30
     },
     receiverTitle: {
         fontSize: 14,
@@ -95,7 +96,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     transactionDetails: {
-        margin: 16,
+        // margin: 16,
+        width:'100%',
+        backgroundColor:'white',
+        padding:10
     },
     detailRow: {
         flexDirection: 'row',

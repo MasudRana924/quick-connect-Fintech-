@@ -222,16 +222,16 @@ const styles = StyleSheet.create({
         gap: 10
     },
     contactButton: {
-        height: 50,
-        width: 50,
-        borderRadius: 25,
+        height: 60,
+        width: 60,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#E2136E',
     },
     contactName: {
-        fontWeight: 'bold',
-        fontSize: 14
+        fontWeight: '500',
+        fontSize: 18
     },
     phoneNumbers: {
         marginTop: 5,
