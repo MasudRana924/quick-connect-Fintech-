@@ -1,24 +1,63 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
-import Spinner from 'react-native-loading-spinner-overlay'; // Importing the Spinner component
-import { MaterialCommunityIcons } from '@expo/vector-icons'; // For using icons
+import { View, Text, StyleSheet,Dimensions } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 
-const TransactionsList = ({ navigation }) => {
+const TransactionsList = () => {
   
-
+    const areaData = [
+        { value: 50, label: 'Jan' },
+        { value: 80, label: 'Feb' },
+        { value: 60, label: 'Mar' },
+        { value: 90, label: 'Apr' },
+        { value: 70, label: 'May' },
+        { value: 100, label: 'Jun' },
+      ];
 
     return (
         <View style={styles.container}>
-           
-        </View>
+   <LineChart
+        data={{
+          labels: ["January", "February", "March", "April", "May", "June"],
+          datasets: [
+            {
+              data: [20, 45, 28, 80, 99, 43],
+            }
+          ]
+        }}
+        width={Dimensions.get("window").width} // from react-native
+        height={220}
+        yAxisLabel=""
+        yAxisSuffix=""
+        chartConfig={{
+          backgroundColor: "#E2136E",
+          backgroundGradientFrom: "#E2136E",
+          backgroundGradientTo: "#ffa726",
+          decimalPlaces: 2, // optional, defaults to 2dp
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          style: {
+            borderRadius: 16,
+          },
+          propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: "#E2136E",
+          },
+        }}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16,
+        }}
+      />
+    </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
     },
     header: {
         flexDirection: 'row',

@@ -21,7 +21,7 @@ const AppNavigation = () => {
   const { userData } = useSelector(state => state.auth);
   return (
     <NavigationContainer>
-       <StatusBar style="dark" backgroundColor="#E2136E" />
+       <StatusBar  backgroundColor="#E2136E" style={{opacity: 0.5,backgroundColor:"#E2136E"}}/>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {userData ? (
           <Stack.Group>
@@ -46,8 +46,4 @@ const AppNavigation = () => {
     </NavigationContainer>
   );
 };
-
 export default AppNavigation;
-
-const styles = StyleSheet.create({
-});

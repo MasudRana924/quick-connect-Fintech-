@@ -3,13 +3,28 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Notification from './Notification';
 import Transaction from './Transaction';
-
+import TransactionsChart from './TransactionsChart';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 const Inbox = () => {
-  const [selectedComponent, setSelectedComponent] = useState('Notification');
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const handleGoBack = () => {
+      navigation.goBack();
+  };
+  const [selectedComponent, setSelectedComponent] = useState('Statistics');
 
+  // const renderComponent = () => {
+  //   if (selectedComponent === 'Notification') {
+  //     return <Notification />;
+  //   } else if (selectedComponent === 'Transaction') {
+  //     return <Transaction />;
+  //   }
+  // };
   const renderComponent = () => {
-    if (selectedComponent === 'Notification') {
-      return <Notification />;
+    if (selectedComponent === 'Statistics') {
+      return <TransactionsChart />;
     } else if (selectedComponent === 'Transaction') {
       return <Transaction />;
     }
@@ -19,13 +34,15 @@ const Inbox = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
+        <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
           <Text style={styles.headerText}>Inbox</Text>
+          <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => setSelectedComponent('Notification')}>
-          <Text style={[styles.buttonText, selectedComponent === 'Notification' && styles.selectedText]}>
-           Notification
+        <TouchableOpacity onPress={() => setSelectedComponent('Statistics')}>
+          <Text style={[styles.buttonText, selectedComponent === 'Statistics' && styles.selectedText]}>
+            Statistics
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setSelectedComponent('Transaction')}>
@@ -48,14 +65,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // backgroundColor: '#E2136E',
-    // paddingVertical: 12,
-    // paddingHorizontal: 16,
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#ccc',
-    // zIndex: 1,
     flexDirection: 'row',
     textAlign: 'center',
     backgroundColor: '#E2136E',
@@ -66,15 +75,25 @@ const styles = StyleSheet.create({
     paddingTop: 20
   },
   headerLeft: {
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    flexDirection: 'row',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
+  arrowIcon: {
+    color: 'white',
+    fontSize: 20,
+    marginLeft: 5,
+    paddingTop: 10,
+},
   headerText: {
     paddingTop: 10,
     fontSize: 18,
     color: 'white',
-    textAlign:'center'
+    textAlign: 'center'
   },
   headerRight: {
     justifyContent: 'center',

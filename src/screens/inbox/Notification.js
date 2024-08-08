@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import TransactionsChart from './TransactionsChart';
+import { View, Text, StyleSheet,Dimensions } from 'react-native';
 import TransactionsList from './TransactionsList';
 
 const Notification = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.noNotificationText}>No Notification</Text>
-      <Text style={styles.notificationInfoText}>New notifications will appear here</Text>
+      {/* <Text style={styles.noNotificationText}>No Notification</Text>
+      <Text style={styles.notificationInfoText}>New notifications will appear here</Text> */}
       <TransactionsList/>
     </View>
   );
@@ -20,8 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    marginTop:200
-
+    // marginTop:200,
   },
   noNotificationText: {
     color: 'red',

@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: '#E2136E',
         paddingHorizontal: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        // borderBottomWidth: 1,
+        // borderBottomColor: '#ccc',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     },
     amount: {
         color: 'white',
+
         fontSize: 14,
         fontWeight: 'bold',
     },
@@ -95,7 +96,8 @@ const styles = StyleSheet.create({
     },
     actionIcon: {
         color: 'white',
-        fontSize: 30,
+
+        fontSize: 20,
         marginLeft: 20, // Increase margin for separation
     },
 });

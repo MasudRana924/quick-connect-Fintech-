@@ -90,6 +90,7 @@ const CashOutNumber = () => {
             <View style={styles.navInfo}>
                 <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Cash Out</Text>
+                <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
             </View>
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
@@ -160,6 +161,7 @@ const styles = StyleSheet.create({
     },
     navInfo: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#E2136E',
         paddingHorizontal: 16,
@@ -170,13 +172,13 @@ const styles = StyleSheet.create({
     },
     arrowIcon: {
         color: 'white',
-        fontSize: 30,
-        marginLeft: 5,
+        fontSize: 20,
+        // marginLeft: 5,
     },
     title: {
         color: 'white',
-        fontSize: 16,
-        marginLeft: 45,
+        fontSize: 18,
+        // marginLeft: 45,
     },
     container: {
         flex: 1,

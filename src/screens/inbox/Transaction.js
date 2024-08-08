@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchtransactions } from '../../redux/reducers/transactions/myTransactionSlice';
 import { Feather } from '@expo/vector-icons';
-import Spinner from 'react-native-loading-spinner-overlay';
 
 const Transaction = () => {
   const dispatch = useDispatch();
@@ -46,9 +45,9 @@ const Transaction = () => {
             ) : null}
             <View style={styles.flexRow}>
               <Text style={styles.transactionId}>Trans ID : {transaction.tranId}</Text>
-              <Feather name="copy" size={16} color="violet" onPress={() => {/* handle copy */}} />
+              {/* <Feather name="copy" size={16} color="violet" onPress={() => handle copy} /> */}
             </View>
-            <Text style={styles.date}>{new Date(transaction.createdAt).toLocaleDateString()}</Text>
+           
           </View>
         </View>
         <View>
@@ -58,6 +57,7 @@ const Transaction = () => {
             <Text style={styles.amountIn}>+ {transaction.amount}.00TK</Text>
           ) : null}
           <Text style={styles.charge}>Charge ট 0.00</Text>
+          <Text style={styles.date}>{new Date(transaction.createdAt).toLocaleDateString()}</Text>
         </View>
       </View>
     </View>
@@ -65,12 +65,11 @@ const Transaction = () => {
 
   return (
     <View style={styles.container}>
-      <Spinner
-        visible={isLoading}
-        // textContent={'Loading...'}
-        textStyle={styles.spinnerText}
-      />
-      {transactions?.length > 0 ? (
+       {isLoading ? (
+        <View style={styles.noTransactionContainer}>
+          <Text style={styles.transactionInfoText}>Loading, please wait...</Text>
+        </View>
+      ) : transactions?.length > 0 ? (
         <FlatList
           data={transactions}
           renderItem={renderItem}
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#e6e6e9',
   },
   listContentContainer: {
     paddingBottom: 20,
@@ -103,9 +102,10 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '100%',
-    marginVertical: 10,
     padding: 10,
     backgroundColor: '#f9f9f9',
+     borderBottomWidth:1,
+        borderBottomColor:'#e5e5e5'
   },
   transactionContainer: {
     flexDirection: 'row',
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginLeft: 2,
     marginTop: 2,
+    textAlign:'right'
   },
   amountOut: {
     fontSize: 12,

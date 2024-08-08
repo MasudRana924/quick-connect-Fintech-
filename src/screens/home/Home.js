@@ -1,11 +1,8 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {ScrollView,StyleSheet,View } from 'react-native';
 import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import Services from '../main/Services';
-import Offer from '../main/offer/Offer';
-import Suggestions from '../main/suggestions/Suggestions';
 import Payment from '../main/payment/Payment';
 import Education from '../main/education/Education';
 import Entertainment from '../main/Entertainment/Entertainment';
@@ -13,15 +10,11 @@ import Sports from '../main/sports/Sports';
 import Shopping from '../main/shopping/Shopping';
 import Tickets from '../main/tickets/Tickets';
 import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
-
 const Home = () => {
-  const { navigate } = useNavigation();
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(clearAgentNumber())
   }, []);
-
   return (
     <View style={styles.container}>
       <Header />
@@ -37,9 +30,7 @@ const Home = () => {
     </View>
   );
 };
-
 export default Home;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

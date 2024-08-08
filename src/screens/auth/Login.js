@@ -6,12 +6,14 @@ import { login } from '../../redux/reducers/auth/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 const Login = () => {
   const navigation = useNavigation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(state => state.auth);
+
   const handlingLogin = () => {
     const params = {
       phone: phone,
@@ -19,6 +21,7 @@ const Login = () => {
     };
     dispatch(login(params));
   };
+
   useEffect(() => {
     if (error) {
       Toast.show({
@@ -30,14 +33,14 @@ const Login = () => {
       });
     }
   }, [error]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>QuickPay</Text>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginTitle}>Login </Text>
+        <Text style={styles.loginTitle}>Login</Text>
         <Icon style={{ color: '#E2136E', fontSize: 20 }} name="scan" size={24} color="white" />
       </View>
-
       <TextInput
         value={phone}
         placeholder="Account Number"
@@ -56,16 +59,20 @@ const Login = () => {
         keyboardType="numeric"
       />
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text style={styles.forgotText}>Forgot Pin ?</Text>
+        <Text style={styles.forgotText}>Forgot Pin?</Text>
       </TouchableOpacity>
       <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} />
       <View style={styles.createContainer}>
-        <Text>
-          Don't have an account?
-        </Text>
+        <Text>Don't have an account?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.createText}> Create new </Text>
+          <Text style={styles.createText}> Create new</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.termsContainer}>
+        <Text style={styles.termsText}>By proceeding you agree</Text>
+        <Text>
+          <Text style={styles.redText}>terms</Text>, <Text style={styles.redText}>conditions</Text> <Text style={styles.grayText}>and</Text> <Text style={styles.redText}>policy</Text>
+        </Text>
       </View>
       <Toast />
     </View>
@@ -73,6 +80,7 @@ const Login = () => {
 };
 
 export default Login;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     color: '#E2136E',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 50
+    marginBottom: 50,
   },
   loginContainer: {
     flexDirection: 'row',
@@ -96,27 +104,26 @@ const styles = StyleSheet.create({
   },
   loginTitle: {
     fontSize: 20,
-    color: 'black'
+    color: 'black',
   },
   qrText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#E2136E'
+    color: '#E2136E',
   },
-
   input: {
     height: 50,
     borderWidth: 2,
     borderBottomWidth: 1,
     borderRadius: 5,
     borderColor: '#E5E8E8',
-    backgroundColor:'#E5E8E8',
+    backgroundColor: '#E5E8E8',
     paddingHorizontal: 20,
   },
   forgotText: {
     textAlign: 'left',
     fontSize: 14,
-    color:'#E2136E'
+    color: '#E2136E',
   },
   createContainer: {
     flexDirection: 'row',
@@ -127,6 +134,26 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 16,
     fontWeight: 'semibold',
-    color: '#E2136E'
-  }
+    color: '#E2136E',
+  },
+  termsContainer: {
+    position: 'absolute',
+    bottom: 20,
+    width: '100%',
+    alignItems: 'center',
+    paddingBottom:15
+  },
+  termsText: {
+    color: 'gray',
+    textAlign: 'left',
+    fontSize:12,
+  },
+  redText: {
+    color: '#E2136E',
+    fontSize:12,
+    fontWeight:'500'
+  },
+  grayText: {
+    color: 'gray',
+  },
 });

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchLastThreeMonthsTransactions } from '../../redux/reducers/transactions/myTransactionSlice';
+import { LineChart } from 'react-native-chart-kit';
 
 const TransactionsChart = () => {
     const dispatch = useDispatch();
     const { transactions } = useSelector((state) => state.transactions.transactionsHistry);
     const { token } = useSelector(state => state.auth.userData);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const { isLoading } = useSelector(state => state.transactions);
 
     useEffect(() => {
         if (token) {
@@ -15,59 +16,70 @@ const TransactionsChart = () => {
         }
     }, [dispatch, token]);
 
-    const handleNext = () => {
-        if (currentIndex < transactions.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-        }
-    };
-
-    const currentTransaction = transactions[currentIndex] || {};
+    const labels = transactions.map(transaction => transaction.month);
+    const data = transactions.map(transaction => transaction.totalAmount);
 
     return (
         <View style={styles.container}>
-            {transactions?.length > 0 ? (
-                <View style={styles.chart}>
-                    <Text>Month: {currentTransaction.month}</Text>
-                    <Text>Year: {currentTransaction.year}</Text>
-                    <Text>Total Amount: {currentTransaction.totalAmount}</Text>
-                    <Text>Total Transactions: {currentTransaction.totalTransactions}</Text>
-                    <Text>Start Balance: {currentTransaction.startBalance}</Text>
-                    <Text>End Balance: {currentTransaction.endBalance}</Text>
+            {isLoading ? (
+                <View style={styles.loadingContainer}>
+                    <Text style={styles.loadingText}>Loading, please wait...</Text>
                 </View>
             ) : (
-                <Text>No transaction data available.</Text>
+                <LineChart
+                    data={{
+                        labels: labels, // Months as labels
+                        datasets: [
+                            {
+                                data: data, // Total amounts for each month
+                            }
+                        ]
+                    }}
+                    width={Dimensions.get("window").width} // from react-native
+                    height={220}
+                    yAxisLabel="৳"
+                    yAxisSuffix=""
+                    chartConfig={{
+                        backgroundColor: "#E2136E",
+                        backgroundGradientFrom: "#E2136E",
+                        backgroundGradientTo: "#ffa726",
+                        decimalPlaces: 2, // optional, defaults to 2dp
+                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        style: {
+                            borderRadius: 16,
+                        },
+                        propsForDots: {
+                            r: "6",
+                            strokeWidth: "2",
+                            stroke: "#E2136E",
+                        },
+                    }}
+                    bezier
+                    style={{
+                        marginVertical: 8,
+                        borderRadius: 16,
+                        margin: 5,
+                    }}
+                />
             )}
-            <View style={styles.buttonsContainer}>
-                <Button title="Previous" onPress={handlePrevious} disabled={currentIndex === 0} />
-                <Button title="Next" onPress={handleNext} disabled={currentIndex === transactions.length - 1} />
-            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        marginTop: 50,
+    },
+    loadingContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        flex: 1,
     },
-    chart: {
-        marginVertical: 8,
-        borderRadius: 16,
-        padding: 16,
-        backgroundColor: '#f9f9f9',
-        alignItems: 'center',
-    },
-    buttonsContainer: {
-        flexDirection: 'row',
-        marginTop: 16,
+    loadingText: {
+        color: 'gray',
+        fontSize: 14,
+        marginTop: 10,
     },
 });
 

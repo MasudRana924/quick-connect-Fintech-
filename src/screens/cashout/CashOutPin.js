@@ -58,8 +58,9 @@ const CashOutPin = () => {
                 textStyle={styles.spinnerTextStyle}
             />
             <View style={styles.navInfo}>
-                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
+            <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Cash Out</Text>
+                <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
             </View>
             <ScrollView>
                 <View style={styles.containerTop}>
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
     },
     navInfo: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#E2136E',
         paddingHorizontal: 16,
@@ -117,13 +119,11 @@ const styles = StyleSheet.create({
     },
     arrowIcon: {
         color: 'white',
-        fontSize: 30,
-        marginLeft: 5,
+        fontSize:20,
     },
     title: {
         color: 'white',
         fontSize: 16,
-        marginLeft: 45,
     },
     container: {
         flex: 1,
@@ -188,6 +188,8 @@ const styles = StyleSheet.create({
     },
     inputTextRed: {
         color: '#E2136E', 
+        fontSize:20,
+        fontWeight:'500'
     },
     button: {
         height: 48,

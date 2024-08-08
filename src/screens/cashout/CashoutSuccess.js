@@ -41,9 +41,9 @@ const CashoutSuccess = () => {
                 </View>
 
                 <View style={styles.rewardInfo}>
-                    <Text style={styles.rewardText}>লেনদেন করার জন্য আপনি রিওয়ার্ডস পয়েন্ট পেয়েছেন। </Text>
+                    <Text style={styles.rewardText}>You have got the reward point  </Text>
                     <Link to="/reward" style={styles.rewardLink}>
-                        <Text style={styles.rewardLinkText}>রিওয়ার্ড দেখুন</Text>
+                        <Text style={styles.rewardLinkText}>See reward</Text>
                     </Link>
                 </View>
             </View>
@@ -63,10 +63,12 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#e6e6e9',
-        // padding: 16,
+        
     },
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     receiverInfo: {
         backgroundColor: '#f3f4f6',
@@ -117,11 +119,15 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     rewardInfo: {
-        margin: 16,
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 8,
-        borderColor: '#e5e7eb',
+        // margin: 16,
+        // borderWidth: 1,
+        // borderRadius: 10,
+        // padding: 8,
+        // borderColor: '#e5e7eb',
+        width:'100%',
+        backgroundColor:'white',
+        padding:10,
+        marginTop:10
     },
     rewardText: {
         fontSize: 12,
@@ -135,7 +141,7 @@ const styles = StyleSheet.create({
     },
     rewardLinkText: {
         fontSize: 12,
-        color: '#8b5cf6',
+        color: '#E2136E',
     },
     button: {
       position: 'absolute',
