@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#E2136E',
+    backgroundColor: '#071B17',
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // alignItems: 'center',
     // textAlign:'center',
-    // backgroundColor: '#E2136E',
+    // backgroundColor: '#071B17',
     // paddingHorizontal: 16,
     // borderBottomWidth: 1,
     // borderBottomColor: '#ccc',

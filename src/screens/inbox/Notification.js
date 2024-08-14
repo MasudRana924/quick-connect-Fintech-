@@ -5,9 +5,9 @@ import TransactionsList from './TransactionsList';
 const Notification = () => {
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.noNotificationText}>No Notification</Text>
-      <Text style={styles.notificationInfoText}>New notifications will appear here</Text> */}
-      <TransactionsList/>
+      <Text style={styles.noNotificationText}>No Notification</Text>
+      <Text style={styles.notificationInfoText}>New notifications will appear here</Text>
+      {/* <TransactionsList/> */}
     </View>
   );
 };

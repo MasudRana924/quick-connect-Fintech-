@@ -92,7 +92,7 @@ const CashOutPin = () => {
                 onPress={handleStore}
                 disabled={!isPinValid}
             >
-                <Text style={styles.buttonText}>Proceed</Text>
+                <Text style={styles.buttonText}>Confirm Pin</Text>
             </TouchableOpacity>
             <Toast />
         </SafeAreaView>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
     },
     container: {
         flex: 1,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -184,19 +184,20 @@ const styles = StyleSheet.create({
         height: 50,
         width: '100%',
         backgroundColor: '#fff',
+        // fontSize:20,
        
     },
     inputTextRed: {
-        color: '#E2136E', 
+        color: '#071B17', 
         fontSize:20,
         fontWeight:'500'
     },
     button: {
         height: 48,
-        borderColor: '#E2136E',
+        borderColor: '#071B17',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
     },
     buttonText: {
         color: 'white'

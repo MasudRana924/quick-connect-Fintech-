@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',

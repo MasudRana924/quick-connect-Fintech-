@@ -103,9 +103,9 @@ const CashOutNumber = () => {
                     />
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 20 }}>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#ced4da', marginTop: 8, borderRadius: 8, width: '100%', height: 44 }}>
-                        <Icon style={{ color: '#E2136E', fontSize: 20 }} name="scan" size={24} color="white" />
-                        <Text style={{ color: '#E2136E', fontSize: 14, marginLeft: 10 }}>Tap to scan QR code</Text>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#071B17', marginTop: 8, borderRadius: 8, width: '100%', height: 44 }}>
+                        <Icon style={{ color: '#071B17', fontSize: 20 }} name="scan" size={24} color="white" />
+                        <Text style={{ color: '#071B17', fontSize: 14, marginLeft: 10 }}>Tap to scan QR code</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 20,
         // marginLeft: 45,
     },
     container: {
@@ -200,13 +200,14 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 48,
-        borderColor: '#E2136E',
+        borderColor: '#071B17',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
     },
     buttonText: {
-        color: 'white'
+        color: 'white',
+        fontSize: 18,
     },
     spinnerTextStyle: {
         color: '#FFF'
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
     },
     contactName: {
         fontWeight: '500',

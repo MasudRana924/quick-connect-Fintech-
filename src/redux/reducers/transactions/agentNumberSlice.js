@@ -4,10 +4,10 @@ import { privatePost } from "../../utilities/apiCaller";
 
 export const takeAgentNumber = createAsyncThunk(
   "/takeNumber",
-  async ({data,token}, { rejectWithValue }) => {
+  async ({ data, token }, { rejectWithValue }) => {
     try {
-        console.log(data,token);
-      const response = await privatePost("/take/agentnumber",token, data);
+      console.log(data, token);
+      const response = await privatePost("/take/agentnumber", token, data);
       return response;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -18,17 +18,18 @@ export const takeAgentNumber = createAsyncThunk(
 export const takeAgentNumberSlice = createSlice({
   name: "signup",
   initialState: {
-    number:[],
+    number: [],
     isLoading: false,
     success: false,
-    errorr:'',
+    errorr: '',
   },
-  reducers: {clearAgentNumber: (state) => {
-    state.number = [],
-    isLoading= false,
-    success=false,
-    errorr=''
-  }},
+  reducers: {
+    clearAgentNumber: (state) => {
+      state.success = false
+      state.number = []
+      state.isLoading = false
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(takeAgentNumber.pending, (state) => {
       state.isLoading = true;

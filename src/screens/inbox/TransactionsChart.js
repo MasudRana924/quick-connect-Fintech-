@@ -40,8 +40,8 @@ const TransactionsChart = () => {
                     yAxisLabel="৳"
                     yAxisSuffix=""
                     chartConfig={{
-                        backgroundColor: "#E2136E",
-                        backgroundGradientFrom: "#E2136E",
+                        backgroundColor: "#071B17",
+                        backgroundGradientFrom: "#071B17",
                         backgroundGradientTo: "#ffa726",
                         decimalPlaces: 2, // optional, defaults to 2dp
                         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -52,7 +52,7 @@ const TransactionsChart = () => {
                         propsForDots: {
                             r: "6",
                             strokeWidth: "2",
-                            stroke: "#E2136E",
+                            stroke: "#071B17",
                         },
                     }}
                     bezier

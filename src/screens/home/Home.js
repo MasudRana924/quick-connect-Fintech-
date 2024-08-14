@@ -1,4 +1,4 @@
-import {ScrollView,StyleSheet,View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
@@ -10,22 +10,27 @@ import Sports from '../main/sports/Sports';
 import Shopping from '../main/shopping/Shopping';
 import Tickets from '../main/tickets/Tickets';
 import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
+import { addAmountToStore, addPasswordToStore, clearStore } from '../../redux/reducers/transactions/sendSlice';
+import HoldButton from '../main/tickets/HoldButton';
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(clearAgentNumber())
+    dispatch(clearStore());
+    dispatch(addAmountToStore());
+    dispatch(addPasswordToStore());
   }, []);
   return (
     <View style={styles.container}>
       <Header />
       <ScrollView>
         <Services />
-        <Payment/>
-        <Education/>
-        <Entertainment/>
-        <Sports/>
-        <Shopping/>
-        <Tickets/>
+        <Payment />
+        <Education />
+        <Entertainment />
+        <Sports />
+        <Shopping />
+        <Tickets />
+        <HoldButton/>
       </ScrollView>
     </View>
   );

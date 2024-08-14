@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     starIcon:{
-        color: '#E2136E',
+        color: '#071B17',
         fontSize: 20,
         marginLeft: 5,
     },

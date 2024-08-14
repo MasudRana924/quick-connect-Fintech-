@@ -13,22 +13,16 @@ const Inbox = () => {
   const handleGoBack = () => {
       navigation.goBack();
   };
-  const [selectedComponent, setSelectedComponent] = useState('Statistics');
+  const [selectedComponent, setSelectedComponent] = useState('Notification');
 
-  // const renderComponent = () => {
-  //   if (selectedComponent === 'Notification') {
-  //     return <Notification />;
-  //   } else if (selectedComponent === 'Transaction') {
-  //     return <Transaction />;
-  //   }
-  // };
   const renderComponent = () => {
-    if (selectedComponent === 'Statistics') {
-      return <TransactionsChart />;
+    if (selectedComponent === 'Notification') {
+      return <Notification />;
     } else if (selectedComponent === 'Transaction') {
       return <Transaction />;
     }
   };
+
 
   return (
     <View style={styles.container}>
@@ -40,9 +34,9 @@ const Inbox = () => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => setSelectedComponent('Statistics')}>
-          <Text style={[styles.buttonText, selectedComponent === 'Statistics' && styles.selectedText]}>
-            Statistics
+        <TouchableOpacity onPress={() => setSelectedComponent('Notification')}>
+          <Text style={[styles.buttonText, selectedComponent === 'Notification' && styles.selectedText]}>
+          Notification
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setSelectedComponent('Transaction')}>
@@ -67,7 +61,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     textAlign: 'center',
-    backgroundColor: '#E2136E',
+    backgroundColor: '#071B17',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
@@ -111,7 +105,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   selectedText: {
-    color: '#E2136E',
+    color: '#071B17',
   },
   contentContainer: {
     flex: 1,

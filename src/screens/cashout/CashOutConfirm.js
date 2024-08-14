@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,43 +7,52 @@ import { createCashOut } from '../../redux/reducers/transactions/cashOutSlice';
 import { clearStore } from '../../redux/reducers/transactions/sendSlice';
 import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
 import Spinner from 'react-native-loading-spinner-overlay';
+
 const CashOutConfirm = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const [isButtonBlack, setIsButtonBlack] = useState(false);
+
     const handleGoBack = () => {
         navigation.goBack();
     };
+
     const { token } = useSelector(state => state.auth.userData);
     const { type, receiverType } = useSelector(state => state.type.type);
     const { receiverphone, senderphone } = useSelector(state => state.type.receiverphone);
     const { amount } = useSelector(state => state.type.amount);
     const { password } = useSelector(state => state.type.password);
-    const data = { receiverphone, type, amount, receiverType, senderphone, password }
+    const data = { receiverphone, type, amount, receiverType, senderphone, password };
+
     const handleConfirm = () => {
-        dispatch(createCashOut({
-            data, token
-        }));
-        
+        dispatch(createCashOut({ data, token }));
     };
-    const { transactions, success, isLoading } = useSelector(state => state.cashOut.cashout);
+
+    const { success, isLoading } = useSelector(state => state.cashOut.cashout);
+
     useEffect(() => {
         if (success) {
-            navigation.navigate('CashOutSuccess');
-            dispatch(clearStore());
-        dispatch(clearAgentNumber());
+            setIsButtonBlack(true);
+            const timeoutId = setTimeout(() => {
+                navigation.navigate('CashOutSuccess');
+                dispatch(clearStore());
+                dispatch(clearAgentNumber());
+            }, 1000); // 1-second delay before navigation
+
+            return () => clearTimeout(timeoutId); // Cleanup timeout on unmount or state change
         }
-    }, [success, navigation]);
+    }, [success, navigation, dispatch]);
+
     return (
         <SafeAreaView style={styles.container}>
             <Spinner
                 visible={isLoading}
-                // textContent={'Loading...'}
                 textStyle={styles.spinnerTextStyle}
             />
             <View style={styles.navInfo}>
-            <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
+                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Cash Out</Text>
-                <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
+                <Icon name="ellipsis-vertical" style={styles.arrowIcon}></Icon>
             </View>
             <View style={styles.contentContainer}>
                 <View style={styles.containerTop}>
@@ -55,26 +64,29 @@ const CashOutConfirm = () => {
                         <Text style={styles.receiverPhone}>{receiverphone}</Text>
                     </View>
                 </View>
-                
+
                 <ScrollView contentContainerStyle={styles.content}>
-                <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: 'space-between', gap: 20, width: '95%' }}>
+                    <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: 'space-between', gap: 20, width: '95%' }}>
                         <View>
                             <Text>Amount</Text>
                             <Text style={{ fontSize: 12, marginTop: 8 }}>{amount}.00</Text>
                         </View>
                         <View>
-                            <Text >Charge </Text>
+                            <Text>Charge </Text>
                             <Text style={{ fontSize: 12, marginTop: 8 }}> 0.00 </Text>
                         </View>
                         <View>
-                            <Text >Total  </Text>
+                            <Text>Total  </Text>
                             <Text style={{ fontSize: 12, marginTop: 8 }}> {amount}.00 </Text>
                         </View>
                     </View>
                 </ScrollView>
 
-                <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
-                    <Text style={styles.confirmButtonText}>Confirm</Text>
+                <TouchableOpacity
+                    style={[styles.confirmButton, isButtonBlack && styles.blackButton]}
+                    onPress={handleConfirm}
+                >
+                    <Text style={styles.confirmButtonText}>Tap and Hold</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -87,26 +99,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#e6e6e9',
-        height: '100%'
+        height: '100%',
     },
     navInfo: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         height: 100,
-        paddingTop: 20
+        paddingTop: 20,
     },
     arrowIcon: {
         color: 'white',
-        fontSize:20,
+        fontSize: 20,
     },
     title: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
     },
     contentContainer: {
         flex: 1,
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -158,7 +170,7 @@ const styles = StyleSheet.create({
     receiverPhone: {
         fontSize: 12,
         alignSelf: 'flex-start',
-        marginTop: 10
+        marginTop: 10,
     },
     amountContainer: {
         flexDirection: 'row',
@@ -170,16 +182,25 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     confirmButton: {
-        width: '100%',
-        backgroundColor: '#E2136E',
-        // borderRadius: 5,
+        width: 100,
+        backgroundColor: '#071B17',
         paddingVertical: 12,
         paddingHorizontal: 20,
-        marginBottom: 0,
+        marginBottom: 10,
+        borderRadius: 100, 
+        alignSelf: 'center', 
+        overflow: 'hidden', 
+        height:100,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     confirmButtonText: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 14,
         textAlign: 'center',
+
+    },
+    blackButton: {
+        backgroundColor: 'black',
     },
 });

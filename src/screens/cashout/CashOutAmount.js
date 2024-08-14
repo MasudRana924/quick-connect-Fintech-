@@ -34,7 +34,7 @@ const CashOutAmount = () => {
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.navInfo}>
-            <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
+                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Cash Out</Text>
                 <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
             </View>
@@ -54,11 +54,11 @@ const CashOutAmount = () => {
                         <TextInput
                             style={[styles.input, amount ? styles.inputTextRed : {}]}
                             placeholder="ট 0"
-                            value={amount}
-                            onChangeText={setAmount}
+                            value={`ট ${amount}`}
+                            onChangeText={(text) => setAmount(text.replace(/[^0-9]/g, ''))} // Only allow numeric input
                             keyboardType="numeric"
                             ref={amountInputRef}
-                            placeholderTextColor="#E2136E" 
+                            placeholderTextColor="#071B17" 
                             textAlign="center"
                         />
                     </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -96,11 +96,11 @@ const styles = StyleSheet.create({
     },
     arrowIcon: {
         color: 'white',
-        fontSize:20,
+        fontSize: 20,
     },
     title: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 18,
     },
     containerTop: {
         flex: 1,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginTop: 20,
         paddingBottom: 20,
-        width: '100%', // Ensure the container takes the full width
+        width: '100%',
     },
     input: {
         flex: 1,
@@ -162,19 +162,19 @@ const styles = StyleSheet.create({
         height: 50,
         width: '100%',
         backgroundColor: '#fff',
-       
+        fontSize: 36,
     },
     inputTextRed: {
-        color: '#E2136E', 
-        fontSize:20,
-        fontWeight:'500'
+        color: '#071B17', 
+        fontSize: 20,
+        fontWeight: '500'
     },
     button: {
         height: 48,
-        borderColor: '#E2136E',
+        borderColor: '#071B17',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E2136E',
+        backgroundColor: '#071B17',
     },
     buttonText: {
         color: 'white'

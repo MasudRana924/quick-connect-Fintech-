@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList,Animated  } from 'react-native';
+import React, { useState ,useRef } from 'react';
 import moreImg from '../../../assets/more.png';
 import railwayImg from '../../../assets/railway.jpg';
 import shohojImg from '../../../assets/railway.jpg';
@@ -45,6 +45,7 @@ const Tickets = () => {
         contentContainerStyle={styles.gridContainer}
       />
     </View>
+  
   );
 }
 
