@@ -7,7 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-// import avatar from '../../images/man.png';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -28,9 +28,8 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.headerLeft}>
         <Text style={styles.headerText}>Settings</Text>
-        </View>
+        <Icon name="ellipsis-vertical" style={styles.arrowIcon} />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -59,28 +58,24 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#ffff'
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: '#071B17',
-    paddingVertical: 12,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#ff006e',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    zIndex: 1,
-    height: 100,
-    paddingTop: 20
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // textAlign:'center',
-    // backgroundColor: '#071B17',
-    // paddingHorizontal: 16,
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#ccc',
-    // height: 100,
-    // paddingTop: 20
+    height: 70,
+    // paddingTop: 10
   },
+  arrowIcon: {
+    color: 'white',
+    fontSize: 20,
+    paddingTop: 15
+},
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,7 +83,7 @@ const styles = StyleSheet.create({
   },
   headerText:{
     paddingTop:15,
-    fontSize:16,
+    fontSize:20,
     color:'white'
 
   },
@@ -104,7 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 10,
-    borderBottomColor: '#c5c3c6', // Set the border color
+    borderBottomColor: '#E5E8E8', // Set the border color
     borderBottomWidth: 1,
     marginTop:10
   },
@@ -119,13 +114,13 @@ const styles = StyleSheet.create({
   },
   logoutContainer: {
     marginTop: 20,
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: '#c0c0c0',
     paddingVertical: 15,
     borderRadius: 5,
     width:'100%'

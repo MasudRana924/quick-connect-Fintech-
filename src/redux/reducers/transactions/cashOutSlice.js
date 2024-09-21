@@ -5,7 +5,7 @@ export const createCashOut = createAsyncThunk(
     "/cashout",
     async ({ data, token }, { rejectWithValue }) => {
         try {
-            const response = await privatePost("/cashout", token, data);
+            const response = await privatePost("/cashout",token,data);
             return response;
         } catch (err) {
             return rejectWithValue(err.response.data.message);

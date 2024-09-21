@@ -12,12 +12,14 @@ import Tickets from '../main/tickets/Tickets';
 import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
 import { addAmountToStore, addPasswordToStore, clearStore } from '../../redux/reducers/transactions/sendSlice';
 import HoldButton from '../main/tickets/HoldButton';
+import { clearTakePassword } from '../../redux/reducers/transactions/takePasswordSlice';
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(clearStore());
     dispatch(addAmountToStore());
     dispatch(addPasswordToStore());
+    dispatch(clearTakePassword());
   }, []);
   return (
     <View style={styles.container}>
@@ -27,10 +29,9 @@ const Home = () => {
         <Payment />
         <Education />
         <Entertainment />
-        <Sports />
-        <Shopping />
-        <Tickets />
-        <HoldButton/>
+        {/* <Sports /> */}
+        {/* <Shopping /> */}
+        {/* <Tickets /> */}
       </ScrollView>
     </View>
   );
@@ -39,7 +40,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e6e6e9',
+    // backgroundColor: '#e6e6e9',
+    backgroundColor: '#fff',
   },
   img: {
     width: '100%',

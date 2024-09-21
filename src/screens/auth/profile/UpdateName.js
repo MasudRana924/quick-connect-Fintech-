@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     navInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',

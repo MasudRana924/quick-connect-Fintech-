@@ -12,7 +12,7 @@ const Reward = () => {
         navigation.goBack();
     };
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <View style={styles.userInfo}>
                 <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Reward</Text>
@@ -60,15 +60,16 @@ const Reward = () => {
 
 export default Reward;
 const styles = StyleSheet.create({
+
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        height: 100,
-        paddingTop: 20
+        height: 70,
+        // paddingTop: 20
     },
     arrowIcon: {
         color: 'white',
@@ -105,11 +106,11 @@ const styles = StyleSheet.create({
         width: '95%',
         alignSelf: 'center',
         height: 100,
-        borderWidth: 1,
-        borderColor: '#e9ecef',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
         borderRadius: 5,
         padding: 5,
-        marginTop: 40,
+        marginTop: 20,
         backgroundColor: 'white',
     },
     rewardTitleContainer: {
@@ -117,6 +118,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 50,
+       
     },
     noRwardTitle: {
         color: 'red',
@@ -127,11 +129,11 @@ const styles = StyleSheet.create({
         width: '95%',
         alignSelf: 'center',
         height: 200,
-        borderWidth: 1,
-        borderColor: '#e9ecef',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
         borderRadius: 5,
         padding: 5,
-        marginTop: 40,
+        marginTop: 20,
         backgroundColor: 'white',
     },
     pointInformation:{
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     starIcon:{
-        color: '#071B17',
+        color: '#ff006e',
         fontSize: 20,
         marginLeft: 5,
     },

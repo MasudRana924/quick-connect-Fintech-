@@ -3,8 +3,9 @@ import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from 'react-na
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigation } from '@react-navigation/native';
 import { clearAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
-import { clearStore } from '../../redux/reducers/transactions/sendSlice';
+import { clearPasswordStore, clearStore } from '../../redux/reducers/transactions/sendSlice';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { clearTakePassword } from '../../redux/reducers/transactions/takePasswordSlice';
 const CashoutSuccess = () => {
     const navigation = useNavigation();
     const { transactions } = useSelector(state => state.cashOut.cashout);
@@ -13,19 +14,24 @@ const CashoutSuccess = () => {
         navigation.navigate('Home');
         dispatch(clearAgentNumber());
         dispatch(clearStore());
+        dispatch(clearPasswordStore());
+        dispatch(clearTakePassword());
     };
 
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.container}>
+                <View style={styles.containerSuccess}>
+                    <Icon name="checkmark-circle" style={styles.circleIcon}></Icon>
+                    <Text style={styles.typeTitle}>{transactions?.type} Successful </Text>
+                </View>
                 <View style={styles.receiverInfo}>
-        
                     <Text style={styles.receiverPhoneTitle}>Recipient</Text>
                     <View style={styles.flexContainer}>
                         <TouchableOpacity style={styles.buttonZero}>
                             <Text style={styles.buttonZeroText}>0</Text>
                         </TouchableOpacity>
-                        
+
                         <Text style={styles.receiverPhone}>{transactions.receiverphone}</Text>
                     </View>
                 </View>
@@ -57,7 +63,7 @@ const CashoutSuccess = () => {
                 </View>
 
                 <View style={styles.rewardInfo}>
-                <Icon name="star" style={styles.starIcon}></Icon>
+                    <Icon name="star" style={styles.starIcon}></Icon>
                     <Text style={styles.rewardText}>You have got the reward point</Text>
                     <Link to="/reward" style={styles.rewardLink}>
                         <Text style={styles.rewardLinkText}>See reward</Text>
@@ -77,12 +83,21 @@ export default CashoutSuccess;
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#e6e6e6',
+        backgroundColor: 'white',
     },
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    containerSuccess: {
+        // flex: 1,
+        justifyContent: 'center',
+        // alignItems: 'center',
+    },
+    typeTitle: {
+        fontSize: 22,
+        color: '#ff006e',
     },
     receiverInfo: {
         backgroundColor: 'white',
@@ -91,6 +106,8 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         width: '100%',
         marginTop: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E5E8E8',
     },
     receiverTitle: {
         fontSize: 14,
@@ -115,7 +132,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -167,6 +184,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         marginTop: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E5E8E8',
     },
     rewardText: {
         fontSize: 14,
@@ -174,9 +193,16 @@ const styles = StyleSheet.create({
         marginTop: 8,
     },
     starIcon: {
-        fontSize: 20,
+        fontSize: 28,
         textAlign: 'center',
         marginTop: 8,
+        color: '#ff006e',
+    },
+    circleIcon: {
+        fontSize: 40,
+        textAlign: 'center',
+        marginTop: 8,
+        color: '#ff006e',
     },
     rewardLink: {
         textAlign: 'center',
@@ -185,7 +211,7 @@ const styles = StyleSheet.create({
     },
     rewardLinkText: {
         fontSize: 14,
-        color: '#071B17',
+        color: '#ff006e',
     },
     button: {
         position: 'absolute',
@@ -195,10 +221,10 @@ const styles = StyleSheet.create({
         height: 60,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         flexDirection: 'row',
-        paddingLeft:12,
-        paddingRight:12
+        paddingLeft: 12,
+        paddingRight: 12
     },
     buttonText: {
         color: 'white',

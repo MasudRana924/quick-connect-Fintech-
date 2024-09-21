@@ -10,6 +10,7 @@ import savingsImg from '../../assets/approved.png';
 import moreImg from '../../assets/app.png';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+
 const Services = () => {
     const navigation = useNavigation();
 
@@ -34,7 +35,7 @@ const Services = () => {
         </TouchableOpacity>
     );
 
-    const numColumns = 3;
+    const numColumns = 4; // Changed to 4 columns
     const numRows = Math.ceil(services.length / numColumns);
 
     // Add placeholder items if necessary
@@ -45,7 +46,6 @@ const Services = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.Title}>Services</Text>
             <FlatList
                 data={servicesWithPlaceholders}
                 renderItem={({ item }) => item.placeholder ? <View style={[styles.gridItem, styles.placeholderItem]} /> : renderItem({ item })}
@@ -77,22 +77,21 @@ const styles = StyleSheet.create({
     },
     gridContainer: {
         justifyContent: 'space-between',
-        paddingHorizontal: 25,
     },
     gridItem: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
-        minWidth: 0, // Ensure items don't stretch unnecessarily
+        minWidth: 0, 
     },
     placeholderItem: {
         backgroundColor: 'transparent',
     },
     moneyIcon: {
-        height: 40,
-        width: 40,
-        marginBottom: 6,
+        height: 30,
+        width: 30,
+        marginBottom: 6
     },
     title: {
         fontSize: 12,

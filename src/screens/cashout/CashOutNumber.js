@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import BirdIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { takeAgentNumber } from '../../redux/reducers/transactions/agentNumberSlice';
 import { addPhoneToStore, addtypeToStore } from '../../redux/reducers/transactions/sendSlice';
-import Toast from 'react-native-toast-message';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as Contacts from 'expo-contacts';
 
@@ -40,28 +42,25 @@ const CashOutNumber = () => {
     }, []);
 
     const handleStore = () => {
-        dispatch(takeAgentNumber({
-            data, token
-        }));
+        dispatch(takeAgentNumber({ data, token }));
         dispatch(addPhoneToStore({ receiverphone, senderphone }));
         dispatch(addtypeToStore({ type, receiverType }));
     };
 
-    const { success, errorr, isLoading } = useSelector(
-        (state) => state.takeAgentNumber
-    );
+    const { success, errorr, isLoading } = useSelector((state) => state.takeAgentNumber);
 
     useEffect(() => {
         if (success) {
             navigation.navigate('CashOutAmount');
         }
         if (errorr) {
-            Toast.show({
-                type: 'error',
-                text1: errorr,
-                position: 'top',
-                duration: 2000,
-                animationDuration: 250,
+            showMessage({
+                // message: errorr,
+                message: 'This is not a agent number',
+                // type: "danger", 
+                backgroundColor: "red",
+                color: "#fff",
+                style: styles.toast,
             });
         }
     }, [success, navigation, errorr]);
@@ -86,11 +85,19 @@ const CashOutNumber = () => {
             <Spinner
                 visible={isLoading}
                 textStyle={styles.spinnerTextStyle}
+                customIndicator={
+                    <LottieView
+                        source={require('../../assets/flyingbird.json')}  // Add your Lottie file here
+                        autoPlay
+                        loop
+                        style={styles.loaderAnimation}
+                    />
+                }
             />
             <View style={styles.navInfo}>
-                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
+                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack} />
                 <Text style={styles.title}>Cash Out</Text>
-                <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
+                <Icon name="ellipsis-vertical" style={styles.arrowIcon} />
             </View>
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
@@ -103,9 +110,9 @@ const CashOutNumber = () => {
                     />
                 </View>
                 <View style={{ alignItems: 'center', marginTop: 20 }}>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#071B17', marginTop: 8, borderRadius: 8, width: '100%', height: 44 }}>
-                        <Icon style={{ color: '#071B17', fontSize: 20 }} name="scan" size={24} color="white" />
-                        <Text style={{ color: '#071B17', fontSize: 14, marginLeft: 10 }}>Tap to scan QR code</Text>
+                    <TouchableOpacity style={styles.scanButton}>
+                        <Icon style={styles.scanIcon} name="scan" size={24} />
+                        <Text style={styles.scanText}>Tap to scan QR code</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
@@ -119,7 +126,7 @@ const CashOutNumber = () => {
                             <TouchableOpacity
                                 style={styles.contactItem}
                                 onPress={() => {
-                                    const phoneNumber = item.phoneNumbers[0]?.number; // Get the first phone number
+                                    const phoneNumber = item.phoneNumbers[0]?.number;
                                     if (phoneNumber) {
                                         handleContactPress(phoneNumber);
                                     }
@@ -135,19 +142,19 @@ const CashOutNumber = () => {
                             </TouchableOpacity>
                         )}
                         style={styles.contactList}
-                        showsVerticalScrollIndicator={false} // Hide the scrollbar
+                        showsVerticalScrollIndicator={false}
                     />
                 )}
             </View>
-
             <TouchableOpacity
                 style={styles.button}
                 onPress={handleStore}
                 disabled={receiverphone.length !== 11}
             >
                 <Text style={styles.buttonText}>Proceed</Text>
+                <Icon name="arrow-forward" style={styles.buttonText} />
             </TouchableOpacity>
-            <Toast />
+            <FlashMessage position="top" />
         </SafeAreaView>
     );
 };
@@ -157,28 +164,55 @@ export default CashOutNumber;
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: "white",
-        height: '100%'
+        height: '100%',
+    },
+    toast: {
+        width: '100%',
+        padding: 25,
+        // borderRadius: 5,
+        marginTop: 30,
+        height: 70,
+        textAlign: 'center'
     },
     navInfo: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        height: 100,
-        paddingTop: 20
+        height: 70,
+        // paddingTop: 10
     },
     arrowIcon: {
         color: 'white',
         fontSize: 20,
-        // marginLeft: 5,
+    },
+    birdIcon: {
+        fontSize: 80,
+        color: '#ff006e',
+        height: 100,
+        width: 100,
+        backgroundColor: 'white',
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    loaderAnimation: {
+        width: 120,
+        height: 120,
+        backgroundColor: 'white',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+        elevation: 5,
+        fontSize: 80,
     },
     title: {
         color: 'white',
         fontSize: 20,
-        // marginLeft: 45,
     },
     container: {
         flex: 1,
@@ -196,33 +230,59 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        height: 50
+        height: 50,
+    },
+    scanButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: '#ff006e',
+        marginTop: 8,
+        borderRadius: 8,
+        width: '100%',
+        height: 44,
+    },
+    scanIcon: {
+        color: '#ff006e',
+        fontSize: 20,
+    },
+    scanText: {
+        color: '#ff006e',
+        fontSize: 14,
+        marginLeft: 10,
     },
     button: {
-        height: 48,
-        borderColor: '#071B17',
-        justifyContent: 'center',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 60,
+        justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
+        flexDirection: 'row',
+        paddingLeft: 12,
+        paddingRight: 12,
     },
     buttonText: {
         color: 'white',
         fontSize: 18,
     },
     spinnerTextStyle: {
-        color: '#FFF'
+        color: '#FFF',
     },
     contactTitle: {
         fontWeight: 'bold',
         fontSize: 14,
         marginTop: 10,
-        marginBottom: 10
+        marginBottom: 10,
     },
     contactItem: {
         flexDirection: 'row',
         padding: 10,
         alignItems: 'center',
-        gap: 10
+        gap: 10,
     },
     contactButton: {
         height: 60,
@@ -230,16 +290,15 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#071B17',
     },
     contactName: {
         fontWeight: '500',
-        fontSize: 18
+        fontSize: 18,
     },
     phoneNumbers: {
         marginTop: 5,
     },
     contactList: {
         flex: 1,
-    }
-});
+    },
+})

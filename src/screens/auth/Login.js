@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import MyButton from '../components/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/reducers/auth/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import BirdIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import LottieView from 'lottie-react-native'; 
+import Spinner from 'react-native-loading-spinner-overlay';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 const Login = () => {
   const navigation = useNavigation();
   const [phone, setPhone] = useState('');
@@ -23,22 +26,42 @@ const Login = () => {
   };
   useEffect(() => {
     if (error) {
-      Toast.show({
-        type: 'error',
-        text1: error,
-        position: 'top',
-        duration: 2000,
-        animationDuration: 250,
+      // Toast.show({
+      //   type: 'error',
+      //   text1: error,
+      //   position: 'top',
+      //   duration: 2000,
+      //   animationDuration: 250,
+      // });
+      showMessage({
+        message: error,
+        // type: "danger", 
+        backgroundColor: "red", 
+        color: "#fff", 
+        style: styles.toast, 
       });
     }
   }, [error]);
   return (
     <View style={styles.container}>
+      <Spinner
+        visible={isLoading}
+        textStyle={styles.spinnerTextStyle}
+        // customIndicator={<BirdIcon name="butterfly-outline" style={styles.birdIcon} ></BirdIcon>}
+        customIndicator={
+          <LottieView
+            source={require('../../assets/flyingbird.json')}  // Add your Lottie file here
+            autoPlay
+            loop
+            style={styles.loaderAnimation}
+          />
+        }
+      />
       <Text style={styles.title}>QuickPay</Text>
       <View style={styles.loginContainer}>
         <Text style={styles.loginTitle}>Login</Text>
         <Icon
-          style={{ color: '#071B17', fontSize: 20 }}
+          style={{ color: '#ff006e', fontSize: 20 }}
           name="scan"
           size={24}
           color="white"
@@ -52,6 +75,7 @@ const Login = () => {
         placeholderTextColor="grey"
         autoCapitalize="none"
         keyboardType="numeric"
+        
         onFocus={() => setIsInputFocused(true)} // Update focus state
         onBlur={() => setIsInputFocused(false)}  // Reset focus state
       />
@@ -62,13 +86,15 @@ const Login = () => {
         style={styles.input}
         placeholderTextColor="grey"
         keyboardType="numeric"
+        secureTextEntry={true} 
         onFocus={() => setIsInputFocused(true)} // Update focus state
         onBlur={() => setIsInputFocused(false)}  // Reset focus state
       />
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>
         <Text style={styles.forgotText}>Forgot Pin?</Text>
       </TouchableOpacity>
-      <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} />
+      {/* <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} /> */}
+      <MyButton title="Login" onPress={handlingLogin} />
       <View style={styles.createContainer}>
         <Text>Don't have an account?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
@@ -83,7 +109,8 @@ const Login = () => {
           </Text>
         </View>
       )}
-      <Toast />
+      {/* <Toast /> */}
+      <FlashMessage position="top" />
     </View>
   );
 };
@@ -100,7 +127,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    color: '#071B17',
+    color: '#ff006e',
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 50,
@@ -118,21 +145,50 @@ const styles = StyleSheet.create({
   qrText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#071B17',
+    color: '#ff006e',
+  },
+  toast: {
+    width: '100%',
+    padding: 25,
+    // borderRadius: 5,
+    marginTop:30,
+    height:70,
+    textAlign:'center'
+},
+  birdIcon: {
+    fontSize: 80,
+    color: '#ff006e',
+    height:100,
+    width:100,
+    backgroundColor:'white',
+     textAlign:'center',
+     justifyContent:'center',
+     alignItems:'center'
+  },
+  loaderAnimation: {
+    width: 120,
+    height: 120,
+    backgroundColor:'white',
+    shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+        elevation: 5,
+        fontSize: 80,
   },
   input: {
     height: 50,
-    borderWidth: 2,
+    // borderWidth: 2,
     borderBottomWidth: 1,
     borderRadius: 5,
-    borderColor: '#E5E8E8',
-    backgroundColor: '#E5E8E8',
+    borderBottomColor: '#E5E8E8',
+    // backgroundColor: '#E5E8E8',
     paddingHorizontal: 20,
   },
   forgotText: {
     textAlign: 'left',
     fontSize: 14,
-    color: '#071B17',
+    color: '#ff006e',
   },
   createContainer: {
     flexDirection: 'row',
@@ -143,7 +199,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 16,
     fontWeight: 'semibold',
-    color: '#071B17',
+    color: '#ff006e',
   },
   termsContainer: {
     position: 'absolute',
@@ -158,7 +214,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   redText: {
-    color: '#071B17',
+    color: '#ff006e',
     fontSize: 12,
     fontWeight: '500',
   },

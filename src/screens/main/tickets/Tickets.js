@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   },
   gridContainer: {
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
   },
   gridItem: {
     flex: 1,

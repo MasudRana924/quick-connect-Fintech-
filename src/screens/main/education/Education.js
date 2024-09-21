@@ -32,7 +32,7 @@ export default function Education() {
     </TouchableOpacity>
   );
 
-  const numColumns = 3;
+  const numColumns = 4;  // Changed to 4 columns
 
   // Add placeholder items if necessary
   const servicesWithPlaceholders = [...services];
@@ -65,28 +65,27 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontSize: 14,
     fontWeight: '500',
-    marginBottom:6,
-    padding:10,
-    borderBottomWidth:1,
-    borderBottomColor:'#e5e5e5'
+    marginBottom: 6,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e5e5',
   },
   gridContainer: {
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
   },
   gridItem: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,
-    minWidth: 0, // Ensure items don't stretch unnecessarily
+    minWidth: 0,  // Ensure items don't stretch unnecessarily
   },
   placeholderItem: {
     backgroundColor: 'transparent',
   },
   moneyIcon: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
     marginBottom: 6,
   },
   title: {

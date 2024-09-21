@@ -32,7 +32,7 @@ const TabNavigation = () => {
         headerShown: false,
       })}
       tabBarOptions={{
-        activeTintColor: '#13463E',
+        activeTintColor: '#ff006e',
         inactiveTintColor: 'gray',
       }}
     >

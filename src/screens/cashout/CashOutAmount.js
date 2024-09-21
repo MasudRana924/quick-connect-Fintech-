@@ -58,7 +58,7 @@ const CashOutAmount = () => {
                             onChangeText={(text) => setAmount(text.replace(/[^0-9]/g, ''))} // Only allow numeric input
                             keyboardType="numeric"
                             ref={amountInputRef}
-                            placeholderTextColor="#071B17" 
+                            placeholderTextColor="#ff006e" 
                             textAlign="center"
                         />
                     </View>
@@ -71,6 +71,7 @@ const CashOutAmount = () => {
                 disabled={!isAmountValid}
             >
                 <Text style={styles.buttonText}>Proceed</Text>
+                <Icon name="arrow-forward" style={styles.buttonText}></Icon>
             </TouchableOpacity>
         </SafeAreaView>
     );
@@ -80,19 +81,20 @@ export default CashOutAmount;
 
 const styles = StyleSheet.create({
     mainContainer: {
-        backgroundColor: '#e6e6e9',
+        // backgroundColor: '#e6e6e9',
+        backgroundColor: 'white',
         height: '100%'
     },
     navInfo: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        height: 100,
-        paddingTop: 20
+        height: 70,
+        // paddingTop: 10
     },
     arrowIcon: {
         color: 'white',
@@ -105,25 +107,36 @@ const styles = StyleSheet.create({
     containerTop: {
         flex: 1,
         alignItems: 'center',
-        width: '100%',
+        width: '90%',
         alignSelf: 'center',
         borderWidth: 1,
         borderColor: '#e9ecef',
         borderRadius: 5,
         padding: 10,
         backgroundColor: 'white',
+        margin:10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+        elevation: 5,
     },
     container: {
         flex: 1,
         alignItems: 'center',
-        width: '100%',
+        width: '90%',
         alignSelf: 'center',
         borderWidth: 1,
         borderColor: '#e9ecef',
         borderRadius: 5,
         padding: 10,
-        marginTop: 10,
         backgroundColor: 'white',
+        margin:10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+        elevation: 5,
     },
     receiverPhoneTitle: {
         fontSize: 12,
@@ -139,7 +152,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -162,22 +175,29 @@ const styles = StyleSheet.create({
         height: 50,
         width: '100%',
         backgroundColor: '#fff',
-        fontSize: 36,
+        fontSize: 26,
     },
     inputTextRed: {
-        color: '#071B17', 
-        fontSize: 20,
+        color: '#ff006e', 
+        fontSize: 26,
         fontWeight: '500'
     },
     button: {
-        height: 48,
-        borderColor: '#071B17',
-        justifyContent: 'center',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 60,
+        justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
+        flexDirection: 'row',
+        paddingLeft:12,
+        paddingRight:12
     },
     buttonText: {
-        color: 'white'
+        color: 'white',
+        fontSize: 18,
     },
     buttonActive: {
         opacity: 1,

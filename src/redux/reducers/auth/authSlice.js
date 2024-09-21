@@ -11,23 +11,9 @@ const initialState = {
   errorMessage: "",
 };
 
-// export const login = createAsyncThunk('login', async (params, thunkApi) => {
-//   try {
-//     console.log("response",params);
-//     const response = await axios.post('https://quick-pay-96uq.onrender.com/api/login',params);
-//     return response.data;
-//   } catch (error) {
-//     return thunkApi.rejectWithValue(error.response.data.message);
-//   }
-// });
 export const login = createAsyncThunk('login', async (params, { rejectWithValue }) => {
   try {
-    console.log(params);
     const response = await publicPost("/login", params);
-    console.log(
-      '🚀 authslice response:',
-      response,
-    );
     return response;
   } catch (err) {
     return rejectWithValue(err.response.data.message);

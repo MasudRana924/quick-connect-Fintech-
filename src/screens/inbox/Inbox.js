@@ -28,7 +28,6 @@ const Inbox = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-        <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
           <Text style={styles.headerText}>Inbox</Text>
           <Icon name="ellipsis-vertical" style={styles.arrowIcon} ></Icon>
         </View>
@@ -61,12 +60,12 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     textAlign: 'center',
-    backgroundColor: '#071B17',
+    backgroundColor: '#ff006e',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    height: 100,
-    paddingTop: 20
+    height: 70,
+    // paddingTop: 10
   },
   headerLeft: {
     // flex: 1,
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   selectedText: {
-    color: '#071B17',
+    color: '#ff006e',
   },
   contentContainer: {
     flex: 1,

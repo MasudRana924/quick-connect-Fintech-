@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     arrowIcon: {
-        color: '#071B17',
+        color: '#ff006e',
         fontSize: 20,
     },
     inputContainer: {
@@ -143,11 +143,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5E8E8',
     },
     inputWithText: {
-        color: '#071B17',
+        color: '#ff006e',
         fontWeight: 'bold'
     },
     button: {
-        backgroundColor: '#071B17',
+        backgroundColor: '#ff006e',
         borderRadius: 5,
         width: '100%',
         height: 45,

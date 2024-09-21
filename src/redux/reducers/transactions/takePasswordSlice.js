@@ -21,7 +21,13 @@ export const takePasswordSlice = createSlice({
         success: false,
         errorr: '',
     },
-
+    reducers: {
+        clearTakePassword: (state) => {
+          state.success = false
+          state.password = []
+          state.isLoading = false
+        }
+      },
     extraReducers: (builder) => {
         builder.addCase(createTakePassword.pending, (state) => {
             state.isLoading = true;
@@ -38,5 +44,5 @@ export const takePasswordSlice = createSlice({
         });
     },
 });
-
+export const { clearTakePassword } = takePasswordSlice.actions;
 export default takePasswordSlice.reducer;

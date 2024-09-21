@@ -33,6 +33,10 @@ const storeTypeSlice = createSlice({
             state.qrcode = action.payload;
             AsyncStorage.setItem("setQR", JSON.stringify(state.qrcode));
         },
+        clearPasswordStore(state) {
+            state.password = []; // Clear the password in Redux state
+            AsyncStorage.removeItem("setPassword"); // Remove password from AsyncStorage
+        },
         clearStore(state) {
             state.type = [];
             state.receiverphone = [];
@@ -42,5 +46,6 @@ const storeTypeSlice = createSlice({
         },
     },
 });
-export const { addPhoneToStore, addtypeToStore, addAmountToStore, addPasswordToStore, addQRToStore, clearStore } = storeTypeSlice.actions;
+
+export const { addPhoneToStore, addtypeToStore, addAmountToStore, addPasswordToStore, addQRToStore, clearPasswordStore, clearStore } = storeTypeSlice.actions;
 export default storeTypeSlice.reducer;
