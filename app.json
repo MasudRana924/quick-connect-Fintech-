@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "porao",
-    "slug": "porao",
+    "name": "QuickPay",
+    "slug": "quick-pay",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,14 +22,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.masudrana_924.porao"
+      "package": "com.masudrana_924.quickpay"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "55d6449b-a668-4982-925f-fe2791bfa07e"
+        "projectId": "20243129-dad1-4bbb-8180-6fd692146faa"
       }
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { SafeAreaView, ScrollView, Pressable, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/reducers/auth/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -12,17 +12,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const Settings = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  // const { user } = useSelector((state) => state.userdetails.userdetails);
 
   const menuItems = [
-    { icon: <FontAwesome name="info-circle" size={24} color="#000814" />, label: 'Account Information', route: 'Information' },
-    { icon: <MaterialIcons name="notifications-none" size={24} color="#000814" />, label: 'Notification', route: 'Notifications' },
-    { icon: <MaterialIcons name="offline-share" size={24} color="#000814" />, label: 'Limit', route: 'Limit' },
-    { icon: <Entypo name="map" size={24} color="#000814" />, label: 'Map', route: 'Map' },
-    { icon: <MaterialIcons name="local-offer" size={24} color="#000814" />, label: 'Coupon', route: 'Coupon' },
-    { icon: <FontAwesome name="headphones" size={24} color="#000814" />, label: 'Settings', route: 'Support' },
-    { icon: <FontAwesome name="headphones" size={24} color="#000814" />, label: 'Support', route: 'Support' },
-    { icon: <AntDesign name="questioncircleo" size={24} color="#000814" />, label: 'About QuickPay', route: 'AboutQuickPay' },
+    { icon: <FontAwesome name="info-circle" size={24} color="#fff" />, label: 'Account Information', route: 'Information' },
+    { icon: <MaterialIcons name="notifications-none" size={24} color="#fff" />, label: 'Notification', route: 'Notifications' },
+    { icon: <MaterialIcons name="offline-share" size={24} color="#fff" />, label: 'Limit', route: 'Limit' },
+    { icon: <Entypo name="map" size={24} color="#fff" />, label: 'Map', route: 'Map' },
+    { icon: <MaterialIcons name="local-offer" size={24} color="#fff" />, label: 'Coupon', route: 'Coupon' },
+    { icon: <FontAwesome name="headphones" size={24} color="#fff" />, label: 'Settings', route: 'Support' },
+    { icon: <FontAwesome name="headphones" size={24} color="#fff" />, label: 'Support', route: 'Support' },
+    { icon: <AntDesign name="questioncircleo" size={24} color="#fff" />, label: 'About QuickPay', route: 'AboutQuickPay' },
   ];
 
   return (
@@ -36,7 +35,9 @@ const Settings = () => {
         {menuItems.map((item, index) => (
           <TouchableOpacity key={index} onPress={() => navigation.navigate(item.route)} style={styles.menuItem}>
             <View style={styles.menuItemContent}>
-              {/* {item.icon} */}
+              <View style={styles.iconContainer}>
+                {item.icon}
+              </View>
               <Text style={styles.menuItemText}>{item.label}</Text>
             </View>
             <AntDesign name="right" size={24} color="#888" />
@@ -58,37 +59,25 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#ffff'
+    backgroundColor: '#ffff'
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ff006e',
+    backgroundColor: '#3a86ff',
     paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
     height: 70,
-    // paddingTop: 10
   },
   arrowIcon: {
     color: 'white',
     fontSize: 20,
     paddingTop: 15
-},
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height:50
   },
-  headerText:{
-    paddingTop:15,
-    fontSize:20,
-    color:'white'
-
-  },
-  headerRight: {
-    justifyContent: 'center',
+  headerText: {
+    paddingTop: 15,
+    fontSize: 20,
+    color: 'white'
   },
   scrollContainer: {
     paddingHorizontal: 16,
@@ -99,31 +88,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 10,
-    borderBottomColor: '#E5E8E8', // Set the border color
-    borderBottomWidth: 1,
-    marginTop:10
+    marginTop: 10
   },
   menuItemContent: {
     flexDirection: 'row',
     alignItems: 'center',
-   
+  },
+  iconContainer: {
+    backgroundColor: '#3a86ff',
+    padding: 8,
+    borderRadius: 50,
+    marginRight: 10, // Space between icon and text
   },
   menuItemText: {
     fontSize: 16,
-    marginLeft: 10,
   },
   logoutContainer: {
     marginTop: 20,
-    // paddingHorizontal: 10,
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#c0c0c0',
+    backgroundColor: '#3a86ff',
     paddingVertical: 15,
     borderRadius: 5,
-    width:'100%'
+    width: '100%'
   },
   logoutText: {
     color: '#fff',

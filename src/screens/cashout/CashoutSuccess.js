@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     },
     typeTitle: {
         fontSize: 22,
-        color: '#ff006e',
+        color: '#3a86ff',
     },
     receiverInfo: {
         backgroundColor: 'white',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -196,13 +196,13 @@ const styles = StyleSheet.create({
         fontSize: 28,
         textAlign: 'center',
         marginTop: 8,
-        color: '#ff006e',
+        color: '#3a86ff',
     },
     circleIcon: {
         fontSize: 40,
         textAlign: 'center',
         marginTop: 8,
-        color: '#ff006e',
+        color: '#3a86ff',
     },
     rewardLink: {
         textAlign: 'center',
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     },
     rewardLinkText: {
         fontSize: 14,
-        color: '#ff006e',
+        color: '#3a86ff',
     },
     button: {
         position: 'absolute',
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         height: 60,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         flexDirection: 'row',
         paddingLeft: 12,
         paddingRight: 12

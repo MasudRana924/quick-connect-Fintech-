@@ -3,7 +3,7 @@ import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, Image, ScrollVi
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-// import LottieView from 'lottie-react-native';
+import LottieView from 'lottie-react-native';
 import coinanimation from '../../assets/coin.json'
 const Reward = () => {
     const { user } = useSelector(state => state.auth.userData);
@@ -13,9 +13,14 @@ const Reward = () => {
     };
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.userInfo}>
+            {/* <View style={styles.userInfo}>
                 <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
                 <Text style={styles.title}>Reward</Text>
+            </View> */}
+            <View style={styles.header}>
+                <Icon name="arrow-back" style={styles.arrowIcon} onPress={handleGoBack}></Icon>
+                <Text style={styles.headerText}>Reward</Text>
+                <Icon name="ellipsis-vertical" style={styles.arrowIcon} />
             </View>
             <ScrollView>
                 <View>
@@ -26,7 +31,7 @@ const Reward = () => {
                             </View>
                             <View>
                                 <View style={styles.lottieContainer}>
-                                    {/* <LottieView source={coinanimation} autoPlay loop style={styles.animation} /> */}
+                                    <LottieView source={coinanimation} autoPlay loop style={styles.animation} />
                                     <Text style={styles.point}>{user?.point}</Text>
                                 </View>
                             </View>
@@ -64,18 +69,35 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         height: 70,
         // paddingTop: 20
     },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#3a86ff',
+        paddingHorizontal: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        height: 70,
+        // paddingTop: 10
+    },
     arrowIcon: {
         color: 'white',
-        fontSize: 30,
-        marginLeft: 5,
+        fontSize: 20,
+        paddingTop: 15
     },
+    headerText:{
+        paddingTop:15,
+        fontSize:20,
+        color:'white'
+    
+      },
     title: {
         color: 'white',
         fontSize: 16,
@@ -142,7 +164,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     starIcon:{
-        color: '#ff006e',
+        color: '#3a86ff',
         fontSize: 20,
         marginLeft: 5,
     },

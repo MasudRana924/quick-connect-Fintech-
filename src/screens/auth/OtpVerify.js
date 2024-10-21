@@ -13,21 +13,21 @@ const OtpVerify = () => {
     const [timer, setTimer] = useState(60);
     const inputRefs = useRef([]);
 
-    useEffect(() => {
-        const savedEndTime = localStorage.getItem("otpEndTime");
-        if (savedEndTime) {
-            const endTime = new Date(savedEndTime);
-            const currentTime = new Date();
-            const diff = Math.ceil((endTime - currentTime) / 1000);
-            if (diff > 0) {
-                setTimer(diff);
-                // setCanResend(false);
-            } else {
-                setTimer(0);
-                // setCanResend(true);
-            }
-        }
-    }, []);
+    // useEffect(() => {
+    //     const savedEndTime = localStorage.getItem("otpEndTime");
+    //     if (savedEndTime) {
+    //         const endTime = new Date(savedEndTime);
+    //         const currentTime = new Date();
+    //         const diff = Math.ceil((endTime - currentTime) / 1000);
+    //         if (diff > 0) {
+    //             setTimer(diff);
+    //             // setCanResend(false);
+    //         } else {
+    //             setTimer(0);
+    //             // setCanResend(true);
+    //         }
+    //     }
+    // }, []);
 
     useEffect(() => {
         let interval;
@@ -66,6 +66,10 @@ const OtpVerify = () => {
             dispatch(verifyOTP({ email, otp }));
         }
     };
+    const handleRegister = (e) => {
+        e.preventDefault();
+        navigation.navigate('Login');
+    };
 
     return (
         <View style={styles.container}>
@@ -79,7 +83,7 @@ const OtpVerify = () => {
                         maxLength={1}
                         value={digit}
                         onChangeText={(value) => handleChange(index, value)}
-                        placeholderTextColor="grey"
+                        placeholderTextColor="blue"
                         keyboardType="numeric"
                         style={[styles.input, digit && styles.inputWithText]}
                         ref={(ref) => inputRefs.current[index] = ref}
@@ -89,7 +93,7 @@ const OtpVerify = () => {
 
             <Pressable
                 style={styles.button}
-                // onPress={handleRegister}
+                onPress={handleRegister}
                 className=" font-semibold text-2xl"
             >
                 <Text style={styles.buttonText}>Verify</Text>
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     arrowIcon: {
-        color: '#ff006e',
+        color: '#3a86ff',
         fontSize: 20,
     },
     inputContainer: {
@@ -133,21 +137,21 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     input: {
-        height: 45,
-        width: 45,
+        height: 47,
+        width: 47,
         borderWidth: 1,
         borderRadius: 5,
         textAlign: 'center',
         color: 'gray',
-        borderColor: '#E5E8E8',
-        backgroundColor: '#E5E8E8',
+        borderColor: '#3a86ff',
+        backgroundColor: 'white',
     },
     inputWithText: {
-        color: '#ff006e',
+        color: '#3a86ff',
         fontWeight: 'bold'
     },
     button: {
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         borderRadius: 5,
         width: '100%',
         height: 45,

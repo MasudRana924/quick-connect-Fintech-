@@ -58,7 +58,7 @@ const CashOutAmount = () => {
                             onChangeText={(text) => setAmount(text.replace(/[^0-9]/g, ''))} // Only allow numeric input
                             keyboardType="numeric"
                             ref={amountInputRef}
-                            placeholderTextColor="#ff006e" 
+                            placeholderTextColor="#3a86ff" 
                             textAlign="center"
                         />
                     </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         fontSize: 26,
     },
     inputTextRed: {
-        color: '#ff006e', 
+        color: '#3a86ff', 
         fontSize: 26,
         fontWeight: '500'
     },
@@ -187,10 +187,10 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: 60,
+        height: 50,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         flexDirection: 'row',
         paddingLeft:12,
         paddingRight:12
@@ -201,9 +201,12 @@ const styles = StyleSheet.create({
     },
     buttonActive: {
         opacity: 1,
+      
     },
     buttonInactive: {
-        opacity: 0.5,
+        // opacity: 0.5,
+        backgroundColor: 'gray',
+        color: 'white',
     },
     helperText: {
         marginTop: 8,

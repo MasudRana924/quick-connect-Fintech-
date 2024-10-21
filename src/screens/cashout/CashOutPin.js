@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import BirdIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTakePassword } from '../../redux/reducers/transactions/takePasswordSlice';
@@ -32,12 +32,11 @@ const CashOutPin = () => {
         if (success) {
             navigation.navigate('CashOutConfirm');
         } else if (errorr) {
-            Toast.show({
-                type: 'error',
-                text1: errorr,
-                position: 'top',
-                duration: 2000,
-                animationDuration: 250,
+            showMessage({
+                message:'Wrong Pin',
+                backgroundColor: "red",
+                color: "#fff",
+                style: styles.toast,
             });
         }
     }, [success, navigation, errorr]);
@@ -142,7 +141,7 @@ const CashOutPin = () => {
                 </TouchableOpacity>
             </View>
 
-            <Toast />
+            <FlashMessage position="top" />
         </SafeAreaView>
     );
 };
@@ -158,12 +157,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         height: 70,
         // paddingTop: 10
+    },
+    toast: {
+        width: '100%',
+        padding: 55,
+        height: 70,
+        textAlign: 'center'
     },
     arrowIcon: {
         color: 'white',
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
     },
     birdIcon: {
         fontSize: 80,
-        color: '#ff006e',
+        color: '#3a86ff',
         height: 100,
         width: 100,
         backgroundColor: 'white',
@@ -186,7 +191,7 @@ const styles = StyleSheet.create({
     loaderAnimation: {
         width: 120,
         height: 120,
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
@@ -235,7 +240,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -263,6 +268,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 2,
         elevation: 5,
+        height:120
     },
     inputContainer: {
         marginTop: 20,
@@ -271,7 +277,7 @@ const styles = StyleSheet.create({
     },
     inputTextRed: {
         fontSize: 24,
-        color: '#ff006e',
+        color: '#3a86ff',
         fontWeight: '700',
         padding: 10,
     },
@@ -294,11 +300,11 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 48,
-        borderColor: '#ff006e',
+        borderColor: '#3a86ff',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingLeft: 5,
         paddingRight: 5,
     },

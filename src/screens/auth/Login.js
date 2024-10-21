@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Button } from 'react-native';
 import MyButton from '../components/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/reducers/auth/authSlice';
@@ -7,14 +7,18 @@ import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Ionicons';
 import BirdIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import LottieView from 'lottie-react-native'; 
+import LottieView from 'lottie-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
+import { MaterialIcons } from '@expo/vector-icons';
+
+
 const Login = () => {
   const navigation = useNavigation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(state => state.auth);
   const handlingLogin = () => {
@@ -25,20 +29,20 @@ const Login = () => {
     dispatch(login(params));
   };
   useEffect(() => {
+    if (phone && password) {
+      setIsButtonDisabled(false); // Enable button if both fields are filled
+    } else {
+      setIsButtonDisabled(true);  // Disable button if either field is empty
+    }
+  }, [phone, password]);
+  useEffect(() => {
     if (error) {
-      // Toast.show({
-      //   type: 'error',
-      //   text1: error,
-      //   position: 'top',
-      //   duration: 2000,
-      //   animationDuration: 250,
-      // });
       showMessage({
         message: error,
         // type: "danger", 
-        backgroundColor: "red", 
-        color: "#fff", 
-        style: styles.toast, 
+        backgroundColor: "red",
+        color: "#fff",
+        style: styles.toast,
       });
     }
   }, [error]);
@@ -47,7 +51,6 @@ const Login = () => {
       <Spinner
         visible={isLoading}
         textStyle={styles.spinnerTextStyle}
-        // customIndicator={<BirdIcon name="butterfly-outline" style={styles.birdIcon} ></BirdIcon>}
         customIndicator={
           <LottieView
             source={require('../../assets/flyingbird.json')}  // Add your Lottie file here
@@ -60,22 +63,27 @@ const Login = () => {
       <Text style={styles.title}>QuickPay</Text>
       <View style={styles.loginContainer}>
         <Text style={styles.loginTitle}>Login</Text>
-        <Icon
-          style={{ color: '#ff006e', fontSize: 20 }}
-          name="scan"
-          size={24}
-          color="white"
-        />
+
+        <TouchableOpacity >
+          <Icon
+            style={{ color: '#3a86ff', fontSize: 20 }}
+            name="scan"
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
       </View>
+
+
       <TextInput
         value={phone}
         placeholder="Account Number"
         onChangeText={setPhone}
         style={styles.input}
         placeholderTextColor="grey"
-        autoCapitalize="none"
+        // autoCapitalize="none"
         keyboardType="numeric"
-        
+
         onFocus={() => setIsInputFocused(true)} // Update focus state
         onBlur={() => setIsInputFocused(false)}  // Reset focus state
       />
@@ -86,7 +94,7 @@ const Login = () => {
         style={styles.input}
         placeholderTextColor="grey"
         keyboardType="numeric"
-        secureTextEntry={true} 
+        secureTextEntry={true}
         onFocus={() => setIsInputFocused(true)} // Update focus state
         onBlur={() => setIsInputFocused(false)}  // Reset focus state
       />
@@ -111,6 +119,7 @@ const Login = () => {
       )}
       {/* <Toast /> */}
       <FlashMessage position="top" />
+
     </View>
   );
 };
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    color: '#ff006e',
+    color: '#3a86ff',
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 50,
@@ -145,36 +154,36 @@ const styles = StyleSheet.create({
   qrText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#ff006e',
+    color: '#3a86ff',
   },
   toast: {
     width: '100%',
     padding: 25,
     // borderRadius: 5,
-    marginTop:30,
-    height:70,
-    textAlign:'center'
-},
+    marginTop: 30,
+    height: 70,
+    textAlign: 'center'
+  },
   birdIcon: {
     fontSize: 80,
-    color: '#ff006e',
-    height:100,
-    width:100,
-    backgroundColor:'white',
-     textAlign:'center',
-     justifyContent:'center',
-     alignItems:'center'
+    color: '#3a86ff',
+    height: 100,
+    width: 100,
+    backgroundColor: 'white',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   loaderAnimation: {
     width: 120,
     height: 120,
-    backgroundColor:'white',
+    // backgroundColor: 'white',
     shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 2,
-        elevation: 5,
-        fontSize: 80,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 5,
+    fontSize: 80,
   },
   input: {
     height: 50,
@@ -183,12 +192,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderBottomColor: '#E5E8E8',
     // backgroundColor: '#E5E8E8',
-    paddingHorizontal: 20,
+    // paddingHorizontal: 10,
   },
   forgotText: {
     textAlign: 'left',
     fontSize: 14,
-    color: '#ff006e',
+    color: '#3a86ff',
   },
   createContainer: {
     flexDirection: 'row',
@@ -199,7 +208,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 16,
     fontWeight: 'semibold',
-    color: '#ff006e',
+    color: '#3a86ff',
   },
   termsContainer: {
     position: 'absolute',
@@ -214,7 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   redText: {
-    color: '#ff006e',
+    color: '#3a86ff',
     fontSize: 12,
     fontWeight: '500',
   },

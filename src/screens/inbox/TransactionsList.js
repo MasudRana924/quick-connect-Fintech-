@@ -29,8 +29,8 @@ const TransactionsList = () => {
         yAxisLabel=""
         yAxisSuffix=""
         chartConfig={{
-          backgroundColor: "#ff006e",
-          backgroundGradientFrom: "#ff006e",
+          backgroundColor: "#3a86ff",
+          backgroundGradientFrom: "#3a86ff",
           backgroundGradientTo: "#ffa726",
           decimalPlaces: 2, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -41,7 +41,7 @@ const TransactionsList = () => {
           propsForDots: {
             r: "6",
             strokeWidth: "2",
-            stroke: "#ff006e",
+            stroke: "#3a86ff",
           },
         }}
         bezier

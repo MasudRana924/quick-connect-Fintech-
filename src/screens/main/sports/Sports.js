@@ -1,12 +1,20 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button, Animated } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
 import rabbitImg from '../../../assets/rabbithole.webp';
 import tsportsImg from '../../../assets/t-sports.jpg';
 import moreImg from '../../../assets/more.png';
 import { useNavigation } from '@react-navigation/native';
-
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 const Sports = () => {
-  const navigation = useNavigation();
+ 
 
   const services = [
     { id: '1', title: 'Rabbithole', img: rabbitImg },
@@ -14,37 +22,58 @@ const Sports = () => {
     { id: '3', title: 'More', img: moreImg },
   ];
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.gridItem}
-      onPress={() => item.navigate && navigation.navigate(item.navigate)}
-    >
-      <Image source={item.img} style={styles.imageIcon} />
-      <Text style={styles.title}>{item.title}</Text>
-    </TouchableOpacity>
-  );
 
-  const numColumns = 3;
 
-  // Add placeholder items if necessary
-  const servicesWithPlaceholders = [...services];
-  while (servicesWithPlaceholders.length % numColumns !== 0) {
-    servicesWithPlaceholders.push({ id: `placeholder-${servicesWithPlaceholders.length}`, placeholder: true });
-  }
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false)
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => token && setExpoPushToken(token));
+
+    // if (Platform.OS === 'android') {
+    //   Notifications.getNotificationChannelsAsync().then(value => setChannels(value ?? []));
+    // }
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      notificationListener.current &&
+        Notifications.removeNotificationSubscription(notificationListener.current);
+      responseListener.current &&
+        Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.Title}>Sports</Text>
-      <FlatList
-        data={servicesWithPlaceholders}
-        renderItem={({ item }) => item.placeholder ? <View style={[styles.gridItem, styles.placeholderItem]} /> : renderItem({ item })}
-        keyExtractor={(item) => item.id}
-        numColumns={numColumns}
-        contentContainerStyle={styles.gridContainer}
-      />
+      
+      {/* Your grid of items */}
+      {/* <View style={styles.gridContainer}>
+        {services.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.gridItem}
+            onPress={() => item.navigate && navigation.navigate(item.navigate)}
+          >
+            <Image source={item.img} style={styles.imageIcon} />
+            <Text style={styles.title}>{item.title}</Text>
+          </TouchableOpacity>
+        ))}
+      </View> */}
+
+      {/* Button to send push notification */}
+      <Button title="Send Notification" onPress={sendPushNotification} />
     </View>
   );
-}
+};
+
 
 export default Sports;
 

@@ -147,7 +147,8 @@ const CashOutNumber = () => {
                 )}
             </View>
             <TouchableOpacity
-                style={styles.button}
+                // style={styles.button}
+                style={receiverphone.length === 11 ? styles.button : [styles.button, styles.buttonInactive]}
                 onPress={handleStore}
                 disabled={receiverphone.length !== 11}
             >
@@ -168,9 +169,7 @@ const styles = StyleSheet.create({
     },
     toast: {
         width: '100%',
-        padding: 25,
-        // borderRadius: 5,
-        marginTop: 30,
+        padding: 55,
         height: 70,
         textAlign: 'center'
     },
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
     },
     birdIcon: {
         fontSize: 80,
-        color: '#ff006e',
+        color: '#3a86ff',
         height: 100,
         width: 100,
         backgroundColor: 'white',
@@ -202,7 +201,7 @@ const styles = StyleSheet.create({
     loaderAnimation: {
         width: 120,
         height: 120,
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
@@ -237,18 +236,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
-        borderColor: '#ff006e',
+        borderColor: '#3a86ff',
         marginTop: 8,
         borderRadius: 8,
         width: '100%',
         height: 44,
     },
     scanIcon: {
-        color: '#ff006e',
+        color: '#3a86ff',
         fontSize: 20,
     },
     scanText: {
-        color: '#ff006e',
+        color: '#3a86ff',
         fontSize: 14,
         marginLeft: 10,
     },
@@ -257,10 +256,10 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: 60,
+        height: 50,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         flexDirection: 'row',
         paddingLeft: 12,
         paddingRight: 12,
@@ -268,6 +267,10 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 18,
+    },
+    buttonInactive: {
+        backgroundColor: 'gray',
+        color: 'white',
     },
     spinnerTextStyle: {
         color: '#FFF',

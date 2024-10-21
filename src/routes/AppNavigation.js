@@ -16,13 +16,15 @@ import { StatusBar } from 'expo-status-bar';
 import CashoutSuccess from '../screens/cashout/CashoutSuccess';
 import Profile from '../screens/auth/profile/Profile';
 import UpdateName from '../screens/auth/profile/UpdateName';
+import Preloader from '../screens/components/Preloader';
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   const { userData } = useSelector(state => state.auth);
   return (
     <NavigationContainer>
-       {/* <StatusBar  backgroundColor="#ff006e" style={{opacity: 0.5,backgroundColor:"#ff006e"}}/> */}
+       {/* <StatusBar  backgroundColor="#3a86ff" style={{opacity: 0.5,backgroundColor:"#3a86ff"}}/> */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+    
         {userData ? (
           <Stack.Group>
             <Stack.Screen name="root" component={TabNavigation} />

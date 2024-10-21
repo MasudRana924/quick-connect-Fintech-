@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     textAlign: 'center',
-    backgroundColor: '#ff006e',
+    backgroundColor: '#3a86ff',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
@@ -98,13 +98,14 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    backgroundColor: 'white',
   },
   buttonText: {
     fontSize: 16,
     color: 'gray',
   },
   selectedText: {
-    color: '#ff006e',
+    color: '#3a86ff',
   },
   contentContainer: {
     flex: 1,

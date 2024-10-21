@@ -71,7 +71,7 @@ const CashOutConfirm = () => {
                     </View>
                 </View>
                 <View style={styles.content}>
-                    <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: 'space-between', gap: 20, width: '95%' }}>
+                    <View style={{ marginTop: 0, flexDirection: 'row', justifyContent: 'space-between', gap: 20, width: '95%',heght:150 }}>
                         <View>
                             <Text style={{ fontSize: 12, marginTop: 8 }}>Amount</Text>
                             <Text style={{ fontSize: 22, marginTop: 8 }}>{amount}.00</Text>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingHorizontal: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     loaderAnimation: {
         width: 120,
         height: 120,
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     contentContainer: {
         flex: 1,
         width: '100%',
-        // height: 200
+        height: 150
     },
     content: {
         // height:100,
@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 2,
         elevation: 5,
+        // height:150
     },
     flexContainer: {
         flexDirection: 'row',
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingHorizontal: 12,
         paddingVertical: 8,
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         borderRadius: 5,
     },
     buttonZeroText: {
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
     },
     confirmButton: {
         width: 100,
-        backgroundColor: '#ff006e',
+        backgroundColor: '#3a86ff',
         paddingVertical: 12,
         paddingHorizontal: 20,
         marginBottom: 10,
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     },
     confirmButtonText: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 18,
         textAlign: 'center',
 
     },

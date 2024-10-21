@@ -47,8 +47,8 @@ const Header = () => {
 export default Header;
 const styles = StyleSheet.create({
     header: {
-        // backgroundColor: '#ff006e',
-        backgroundColor: '#ff006e',
+        // backgroundColor: '#3a86ff',
+        backgroundColor: '#3a86ff',
         paddingHorizontal: 12,
         flexDirection: 'row',
         justifyContent: 'space-between',
