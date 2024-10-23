@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     moneyIcon: {
-        height: 30,
-        width: 30,
+        height: 40,
+        width: 40,
         marginBottom: 6
     },
     title: {
-        fontSize: 12,
+        fontSize: 14,
         textAlign: 'center',
         color: '#000000',
         marginTop: 10,

@@ -14,14 +14,14 @@ const Settings = () => {
   const navigation = useNavigation();
 
   const menuItems = [
-    { icon: <FontAwesome name="info-circle" size={24} color="#fff" />, label: 'Account Information', route: 'Information' },
-    { icon: <MaterialIcons name="notifications-none" size={24} color="#fff" />, label: 'Notification', route: 'Notifications' },
-    { icon: <MaterialIcons name="offline-share" size={24} color="#fff" />, label: 'Limit', route: 'Limit' },
-    { icon: <Entypo name="map" size={24} color="#fff" />, label: 'Map', route: 'Map' },
-    { icon: <MaterialIcons name="local-offer" size={24} color="#fff" />, label: 'Coupon', route: 'Coupon' },
-    { icon: <FontAwesome name="headphones" size={24} color="#fff" />, label: 'Settings', route: 'Support' },
-    { icon: <FontAwesome name="headphones" size={24} color="#fff" />, label: 'Support', route: 'Support' },
-    { icon: <AntDesign name="questioncircleo" size={24} color="#fff" />, label: 'About QuickPay', route: 'AboutQuickPay' },
+    { icon: <FontAwesome name="info-circle" size={20} color="#fff" />, label: 'Account Information', route: 'Information' },
+    { icon: <MaterialIcons name="notifications-none" size={20} color="#fff" />, label: 'Notification', route: 'Notifications' },
+    { icon: <MaterialIcons name="offline-share" size={20} color="#fff" />, label: 'Limit', route: 'Limit' },
+    { icon: <Entypo name="map" size={20} color="#fff" />, label: 'Map', route: 'Map' },
+    { icon: <MaterialIcons name="local-offer" size={20} color="#fff" />, label: 'Coupon', route: 'Coupon' },
+    { icon: <FontAwesome name="headphones" size={20} color="#fff" />, label: 'Settings', route: 'Support' },
+    { icon: <FontAwesome name="headphones" size={20} color="#fff" />, label: 'Support', route: 'Support' },
+    { icon: <AntDesign name="questioncircleo" size={20} color="#fff" />, label: 'About QuickPay', route: 'AboutQuickPay' },
   ];
 
   return (
@@ -40,7 +40,7 @@ const Settings = () => {
               </View>
               <Text style={styles.menuItemText}>{item.label}</Text>
             </View>
-            <AntDesign name="right" size={24} color="#888" />
+            
           </TouchableOpacity>
         ))}
         <View style={styles.logoutContainer}>

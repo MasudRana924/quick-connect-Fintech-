@@ -27,8 +27,8 @@ const Home = () => {
       <ScrollView>
         <Services />
         <Payment />
-        <Education />
-        <Entertainment />
+        {/* <Education /> */}
+        {/* <Entertainment /> */}
         {/* <Sports /> */}
         {/* <Shopping /> */}
         {/* <Tickets /> */}

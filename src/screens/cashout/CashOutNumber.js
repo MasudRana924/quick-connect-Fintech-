@@ -55,9 +55,7 @@ const CashOutNumber = () => {
         }
         if (errorr) {
             showMessage({
-                // message: errorr,
-                message: 'This is not a agent number',
-                // type: "danger", 
+                message: 'This is not an agent number',
                 backgroundColor: "red",
                 color: "#fff",
                 style: styles.toast,
@@ -87,7 +85,7 @@ const CashOutNumber = () => {
                 textStyle={styles.spinnerTextStyle}
                 customIndicator={
                     <LottieView
-                        source={require('../../assets/flyingbird.json')}  // Add your Lottie file here
+                        source={require('../../assets/flyingbird.json')}
                         autoPlay
                         loop
                         style={styles.loaderAnimation}
@@ -101,6 +99,7 @@ const CashOutNumber = () => {
             </View>
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
+                    <Icon name="search" style={styles.searchIcon} />
                     <TextInput
                         style={styles.input}
                         placeholder="Account Number"
@@ -147,7 +146,6 @@ const CashOutNumber = () => {
                 )}
             </View>
             <TouchableOpacity
-                // style={styles.button}
                 style={receiverphone.length === 11 ? styles.button : [styles.button, styles.buttonInactive]}
                 onPress={handleStore}
                 disabled={receiverphone.length !== 11}
@@ -171,7 +169,7 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 55,
         height: 70,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     navInfo: {
         flexDirection: 'row',
@@ -182,32 +180,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         height: 70,
-        // paddingTop: 10
     },
     arrowIcon: {
         color: 'white',
         fontSize: 20,
     },
-    birdIcon: {
-        fontSize: 80,
-        color: '#3a86ff',
-        height: 100,
-        width: 100,
-        backgroundColor: 'white',
-        textAlign: 'center',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     loaderAnimation: {
         width: 120,
         height: 120,
-        // backgroundColor: 'white',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
         shadowRadius: 2,
         elevation: 5,
-        fontSize: 80,
     },
     title: {
         color: 'white',
@@ -221,15 +206,22 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    input: {
-        flex: 1,
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 8,
         height: 50,
+    },
+    searchIcon: {
+        fontSize: 20,
+        color: '#ccc',
+        paddingRight: 10,
+    },
+    input: {
+        flex: 1,
+        fontSize: 16,
+        paddingVertical: 8,
     },
     scanButton: {
         flexDirection: 'row',
@@ -299,9 +291,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     phoneNumbers: {
-        marginTop: 5,
+        color: '#888',
+        marginTop: 4,
     },
-    contactList: {
-        flex: 1,
-    },
-})
+});

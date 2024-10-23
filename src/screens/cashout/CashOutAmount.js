@@ -31,6 +31,12 @@ const CashOutAmount = () => {
         }
     }, []);
 
+    const suggestedAmounts = [5, 10, 50, 100, 500, 1000]; // Suggested amounts
+
+    const handleSuggestedAmountClick = (value) => {
+        setAmount(String(value));
+    };
+
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.navInfo}>
@@ -50,19 +56,31 @@ const CashOutAmount = () => {
                 </View>
                 <View style={styles.container}>
                     <Text style={styles.receiverPhoneTitle}>Amount</Text>
-                    <View style={styles.inputContainer}>
+                    <View style={styles.inputAndSuggestions}>
+                        <View style={styles.suggestedContainer}>
+                            {suggestedAmounts.map((suggestedAmount) => (
+                                <TouchableOpacity
+                                    key={suggestedAmount}
+                                    style={styles.suggestedButton}
+                                    onPress={() => handleSuggestedAmountClick(suggestedAmount)}
+                                >
+                                    <Text style={styles.suggestedText}>{suggestedAmount}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                         <TextInput
                             style={[styles.input, amount ? styles.inputTextRed : {}]}
-                            placeholder="ট 0"
+                            placeholder="ট 0.00"
                             value={`ট ${amount}`}
                             onChangeText={(text) => setAmount(text.replace(/[^0-9]/g, ''))} // Only allow numeric input
                             keyboardType="numeric"
                             ref={amountInputRef}
-                            placeholderTextColor="#3a86ff" 
+                            placeholderTextColor="#3a86ff"
                             textAlign="center"
                         />
+
                     </View>
-                    <Text style={{alignItems: 'center', fontSize: 12}}>Available balance {user?.amount}.00</Text>
+                    <Text style={{ alignItems: 'center', fontSize: 12 }}>Available balance {user?.amount}.00</Text>
                 </View>
             </ScrollView>
             <TouchableOpacity
@@ -81,9 +99,8 @@ export default CashOutAmount;
 
 const styles = StyleSheet.create({
     mainContainer: {
-        // backgroundColor: '#e6e6e9',
         backgroundColor: 'white',
-        height: '100%'
+        height: '100%',
     },
     navInfo: {
         flexDirection: 'row',
@@ -94,7 +111,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
         height: 70,
-        // paddingTop: 10
     },
     arrowIcon: {
         color: 'white',
@@ -114,7 +130,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         backgroundColor: 'white',
-        margin:10,
+        margin: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
@@ -131,7 +147,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         backgroundColor: 'white',
-        margin:10,
+        margin: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
@@ -163,9 +179,11 @@ const styles = StyleSheet.create({
         fontSize: 12,
         flex: 1,
     },
-    inputContainer: {
+    inputAndSuggestions: {
+        flexDirection: 'row',
+        justifyContent: 'space-between', // Aligns the input field and suggested amounts side by side
+        alignItems: 'center',
         marginTop: 20,
-        paddingBottom: 20,
         width: '100%',
     },
     input: {
@@ -173,14 +191,28 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 8,
         height: 50,
-        width: '100%',
         backgroundColor: '#fff',
         fontSize: 26,
     },
     inputTextRed: {
-        color: '#3a86ff', 
+        color: '#3a86ff',
         fontSize: 26,
-        fontWeight: '500'
+        fontWeight: '500',
+    },
+    suggestedContainer: {
+        flexDirection: 'column', // Vertically aligns the suggested amounts
+        marginLeft: 10,
+    },
+    suggestedButton: {
+        backgroundColor: '#f1f1f1',
+        padding: 10,
+        marginVertical: 5,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    suggestedText: {
+        fontSize: 16,
+        color: '#333',
     },
     button: {
         position: 'absolute',
@@ -192,8 +224,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#3a86ff',
         flexDirection: 'row',
-        paddingLeft:12,
-        paddingRight:12
+        paddingLeft: 12,
+        paddingRight: 12,
     },
     buttonText: {
         color: 'white',
@@ -201,16 +233,9 @@ const styles = StyleSheet.create({
     },
     buttonActive: {
         opacity: 1,
-      
     },
     buttonInactive: {
-        // opacity: 0.5,
         backgroundColor: 'gray',
         color: 'white',
-    },
-    helperText: {
-        marginTop: 8,
-        fontSize: 12,
-        color: '#888',
     },
 });

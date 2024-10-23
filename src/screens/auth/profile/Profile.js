@@ -1,59 +1,25 @@
 import React, { useState } from 'react';
-import { ScrollView, SafeAreaView, View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { SafeAreaView, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowIcon from 'react-native-vector-icons/Ionicons';
+import QRCode from 'react-native-qrcode-svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import Modal from 'react-native-modal';
 
 const Profile = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const { user } = useSelector(state => state.auth.userData);
     const [avatar, setAvatar] = useState(user?.avatarLogo || null);
+    const [isModalVisible, setModalVisible] = useState(false); // Modal state
 
     const handleGoBack = () => {
         navigation.goBack();
     };
 
-    const handleImageSelection = () => {
-        Alert.alert(
-            "Change Profile Picture",
-            "Choose an option",
-            [
-                { text: "Camera", onPress: openCamera },
-                { text: "Gallery", onPress: openGallery },
-                { text: "Cancel", style: "cancel" }
-            ]
-        );
-    };
-
-    const openCamera = () => {
-        launchCamera({ mediaType: 'photo', quality: 1 }, (response) => {
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.errorMessage) {
-                console.log('ImagePicker Error: ', response.errorMessage);
-            } else if (response.assets) {
-                const source = { uri: response.assets[0].uri };
-                setAvatar(source.uri);
-                // Dispatch or handle the new image as needed
-            }
-        });
-    };
-
-    const openGallery = () => {
-        launchImageLibrary({ mediaType: 'photo', quality: 1 }, (response) => {
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.errorMessage) {
-                console.log('ImagePicker Error: ', response.errorMessage);
-            } else if (response.assets) {
-                const source = { uri: response.assets[0].uri };
-                setAvatar(source.uri);
-                // Dispatch or handle the new image as needed
-            }
-        });
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible); // Toggle modal visibility
     };
 
     return (
@@ -70,7 +36,7 @@ const Profile = () => {
                     ) : (
                         <Icon name="user" size={100} color="#ccc" />
                     )}
-                    <TouchableOpacity style={styles.cameraIcon} onPress={handleImageSelection}>
+                    <TouchableOpacity style={styles.cameraIcon}>
                         <Icon name="camera" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
@@ -89,12 +55,29 @@ const Profile = () => {
                     <Icon name="chevron-right" size={24} color="#ccc" />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.option}>
+                <TouchableOpacity style={styles.option} onPress={toggleModal}>
                     <ArrowIcon name="qr-code" size={24} color="white" style={styles.icons} />
                     <Text style={styles.optionText}>My QR Code</Text>
                     <Icon name="chevron-right" size={24} color="#ccc" />
                 </TouchableOpacity>
             </View>
+
+            <Modal
+                isVisible={isModalVisible}
+                onBackdropPress={toggleModal} // Close when tapping outside
+                style={styles.bottomModal}
+            >
+                <View style={styles.modalContent}>
+                    <Text style={styles.modalTitle}>My QR Code</Text>
+                    <QRCode
+                        value="https://example.com" // Replace with any static value
+                        size={200}
+                    />
+                    <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
+                        <Text style={styles.closeButtonText}>Close</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 };
@@ -102,7 +85,7 @@ const Profile = () => {
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: "white",
-        height: '100%'
+        height: '100%',
     },
     header: {
         flexDirection: 'row',
@@ -117,12 +100,12 @@ const styles = StyleSheet.create({
     arrowIcon: {
         color: 'white',
         fontSize: 20,
-        paddingTop: 15
+        paddingTop: 15,
     },
     headerText: {
         paddingTop: 15,
         fontSize: 20,
-        color: 'white'
+        color: 'white',
     },
     profileContainer: {
         alignItems: 'center',
@@ -164,13 +147,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingVertical: 12,
-        marginTop: 15
+        marginTop: 15,
     },
     optionText: {
         flex: 1,
         fontSize: 16,
         color: '#333',
         marginLeft: 16,
+    },
+    bottomModal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        alignItems: 'center',
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    closeButton: {
+        marginTop: 20,
+        backgroundColor: '#3a86ff',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 10,
+    },
+    closeButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
     },
 });
 
